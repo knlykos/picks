@@ -1,0 +1,49 @@
+
+    <div class="card">
+      <div class="card-header">
+        Equipos
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          Block
+        </div>
+        <div class="card-text">
+          <form clrForm>
+            <clr-input-container>
+              <label for="name">Nombre</label>
+              <input type="text" [(ngModel)]="team.name" name="name" clrInput id="name" />
+            </clr-input-container>
+            <clr-input-container>
+              <label for="description">Descripción</label>
+              <input
+                type="text"
+                name="description"
+                [(ngModel)]="team.description"
+                clrInput
+                id="description"
+              />
+            </clr-input-container>
+            <clr-input-container>
+              <label for="logo-url">Logo</label>
+              <input type="text" name="logo-url" [(ngModel)]="team.logoUrl" clrInput id="name" />
+            </clr-input-container>
+          </form>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button name="insert-team" class="btn btn-sm btn-link" (click)="insertTeam()">
+          Guardar
+        </button>
+        <!-- <button class="btn btn-sm btn-link">Footer Action 2</button> -->
+      </div>
+    </div>
+
+
+<!-- <label class="btn btn-link">
+    <input type="file"
+           (change)="onChange($event)"
+           placeholder="Upload file"
+           class="button-input"
+           accept="*">
+    Attach Files
+</label> -->

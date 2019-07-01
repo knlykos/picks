@@ -1,0 +1,15 @@
+<clr-datagrid>
+  <clr-dg-column>Código</clr-dg-column>
+  <clr-dg-column>Logo</clr-dg-column>
+  <clr-dg-column>Nombre</clr-dg-column>
+  <clr-dg-column>Descripción</clr-dg-column>
+
+  <clr-dg-row *ngFor="let team of teams">
+    <clr-dg-cell>{{ team.id }}</clr-dg-cell>
+    <clr-dg-cell><img [src]="team.logoUrl" height="40" alt=""/></clr-dg-cell>
+    <clr-dg-cell>{{ team.name }}</clr-dg-cell>
+    <clr-dg-cell>{{ team.description }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{ teams.length }} Equipos</clr-dg-footer>
+</clr-datagrid>
