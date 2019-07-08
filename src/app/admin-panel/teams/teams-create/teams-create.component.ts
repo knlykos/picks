@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Team } from './../../models/team';
+import { Team } from './../../../models/team';
 import { Apollo, Query } from 'apollo-angular';
 import gql from 'graphql-tag';
 

@@ -1,4 +1,4 @@
-export interface Betts {
+export interface Bet {
   id?: number;
   title?: string;
   description?: string;

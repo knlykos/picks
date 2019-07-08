@@ -1,0 +1,68 @@
+<nav style="position: sticky; top: 0;">
+    <button
+      [id]="contextMenu[0].id"
+      [disabled]="contextMenu[0].disabled"
+      [ngClass]="contextMenu[0].cssClass"
+      (click)="updateBet()"
+    >
+      {{ contextMenu[0].title }}
+    </button>
+  </nav>
+  <div class="card">
+    <div class="card-header">
+      Nueva Apuesta
+    </div>
+    <div class="card-block">
+      <div class="card-title">
+        {{ this.bet.title }}
+      </div>
+      <div class="card-text">
+        <form clrForm [formGroup]="betsForm">
+          <clr-input-container>
+            <label for="title" class="clr-control-label">Titulo</label>
+            <input clrInput type="text" name="title" id="title" formControlName="title" />
+          </clr-input-container>
+          <clr-input-container>
+            <label for="description" class="clr-control-label">Descripción</label>
+            <input
+              clrInput
+              id="description"
+              type="text"
+              name="description"
+              formControlName="description"
+            />
+          </clr-input-container>
+
+          <clr-date-container>
+            <label for="created-at">Fecha</label>
+            <input id="created-at" type="date" clrDate name="date" formControlName="createdAt" />
+          </clr-date-container>
+          <clr-input-container>
+            <label for="event-url" class="clr-control-label">Url del Evento</label>
+            <input
+              clrInput
+              id="event-url"
+              type="text"
+              placeholder="http://www.ejemplo.com"
+              name="event-url"
+              formControlName="eventUrl"
+            />
+          </clr-input-container>
+          <br />
+          <clr-select-container>
+            <label for="category-selector" class="clr-control-label">Categoría</label>
+            <select
+              clrSelect
+              name="categories-selector"
+              id="category-selector"
+              formControlName="categoryId"
+            >
+              <option [ngValue]="category.id" *ngFor="let category of categories">{{
+                category.name
+              }}</option>
+            </select>
+          </clr-select-container>
+        </form>
+      </div>
+    </div>
+  </div>

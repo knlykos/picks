@@ -1,0 +1,26 @@
+<nav style="position: sticky; top: 0;">
+  <button
+    [id]="menu.id"
+    [disabled]="menu.disabled"
+    [ngClass]="menu.cssClass"
+    [routerLink]="menu.url"
+    *ngFor="let menu of contextMenu"
+  >
+    {{ menu.title }}
+  </button>
+</nav>
+<clr-datagrid [(clrDgSingleSelected)]="selectedBet" [clrDgRowSelection]="true" (clrDgSingleSelectedChange)="selectionChanged($event)">
+  <clr-dg-column>Código</clr-dg-column>
+  <clr-dg-column>Titulo</clr-dg-column>
+  <clr-dg-column>Descripción</clr-dg-column>
+  <clr-dg-column>Url del Evento</clr-dg-column>
+
+  <clr-dg-row *ngFor="let bet of bets" [clrDgItem]="bet">
+    <clr-dg-cell>{{ bet.id }}</clr-dg-cell>
+    <clr-dg-cell>{{ bet.title }}</clr-dg-cell>
+    <clr-dg-cell>{{ bet.description }}</clr-dg-cell>
+    <clr-dg-cell>{{ bet.eventUrl }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{ bets.length }} {{ bets.length === 1 ? 'apuesta' : 'apuestas' }}</clr-dg-footer>
+</clr-datagrid>

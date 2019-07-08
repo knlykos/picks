@@ -21,13 +21,13 @@ export class MainPanelComponent implements OnInit {
       .subscribe<Query>({
         query: gql`
           subscription {
-            betts {
+            bets {
               categoryId
-              created_at
-              created_by
+              createdAt
+              createdBy
               description
               event
-              event_url
+              eventUrl
               id
               placeId
               siteId
@@ -37,7 +37,7 @@ export class MainPanelComponent implements OnInit {
         `
       })
       .subscribe(value => {
-        this.apuestas = value.data.betts;
+        this.apuestas = value.data.bets;
       });
   }
 }
