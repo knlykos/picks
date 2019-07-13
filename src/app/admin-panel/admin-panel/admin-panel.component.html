@@ -1,7 +1,5 @@
 <clr-main-container>
-  <!-- <div class="alert alert-app-level">
-    ...
-  </div> -->
+  <app-app-alert></app-app-alert>
   <clr-header>
     <div class="header-nav">
       <a href="javascript://" class="active nav-link nav-text">Apuestas</a>
@@ -46,14 +44,10 @@
           <ul class="nav-list">
             <!-- <li><a class="nav-link">Apuestas</a></li> -->
             <li>
-              <a class="nav-link" [routerLink]="['/admin/teams-list']" routerLinkActive="active"
-                >Equipos</a
-              >
+              <a class="nav-link" [routerLink]="['/admin/teams-list']" routerLinkActive="active">Equipos</a>
             </li>
             <li>
-              <a class="nav-link" [routerLink]="['/admin/categories']" routerLinkActive="active"
-                >Categorías</a
-              >
+              <a class="nav-link" [routerLink]="['/admin/categories']" routerLinkActive="active">Categorías</a>
             </li>
           </ul>
         </section>

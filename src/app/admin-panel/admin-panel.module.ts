@@ -6,12 +6,13 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 // import { BetsCreateComponent } from './bets-create/bets-create.component';
 import { ClarityModule } from '@clr/angular';
 import { AdminPanelRoutingModule } from './admin-panel-routing.module';
+import { AppAlertComponent } from './shared/app-alert/app-alert.component';
 // import { TeamsCreateComponent } from './teams-create/teams-create.component';
 
 // import { TeamsListComponent } from './teams-list/teams-list.component';
 
 @NgModule({
-  declarations: [AdminPanelComponent],
+  declarations: [AdminPanelComponent, AppAlertComponent],
   imports: [CommonModule, FormsModule, ClarityModule, ReactiveFormsModule, AdminPanelRoutingModule]
 })
 export class AdminPanelModule {}
