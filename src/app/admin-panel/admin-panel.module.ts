@@ -7,12 +7,13 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ClarityModule } from '@clr/angular';
 import { AdminPanelRoutingModule } from './admin-panel-routing.module';
 import { AppAlertComponent } from './shared/app-alert/app-alert.component';
+import { AppAlertDirective } from './shared/app-alert/app-alert.directive';
 // import { TeamsCreateComponent } from './teams-create/teams-create.component';
 
 // import { TeamsListComponent } from './teams-list/teams-list.component';
 
 @NgModule({
-  declarations: [AdminPanelComponent, AppAlertComponent],
+  declarations: [AdminPanelComponent, AppAlertComponent, AppAlertDirective],
   imports: [CommonModule, FormsModule, ClarityModule, ReactiveFormsModule, AdminPanelRoutingModule]
 })
 export class AdminPanelModule {}

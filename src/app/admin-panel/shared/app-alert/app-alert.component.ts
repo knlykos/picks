@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
+import { Subject, Observable } from 'rxjs';
+import { AppAlertDirective } from './app-alert.directive';
+import { AppAlertService } from './app-alert.service';
 
 export interface AppLevelAlert {
   type: 'info' | 'warning' | 'success' | 'danger';
@@ -6,17 +10,24 @@ export interface AppLevelAlert {
   action: string;
 }
 
-
 @Component({
   selector: 'app-app-alert',
   templateUrl: './app-alert.component.html',
-  styleUrls: ['./app-alert.component.scss']
+  styleUrls: ['./app-alert.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppAlertComponent implements OnInit {
+export class AppAlertComponent implements OnInit, OnDestroy {
+  @Input() appAlerts: AppLevelAlert;
+  @ViewChild(AppAlertDirective, { static: true }) appAlert: AppAlertDirective;
+  data: AppLevelAlert;
 
-  constructor() { }
+  constructor(private appAlertService: AppAlertService) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnDestroy() {}
+
+  public onAction() {
+    this.appAlertService._onAction.next();
   }
-
 }

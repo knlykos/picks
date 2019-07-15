@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category';
 import { Bet } from 'src/app/models/bets';
@@ -7,16 +7,21 @@ import { ContextMenu } from 'src/app/models/context-menu';
 import { Apollo } from 'apollo-angular';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { AppAlertService } from '../../shared/app-alert/app-alert.service';
+import { Subscription } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-bets-update',
   templateUrl: './bets-update.component.html',
-  styleUrls: ['./bets-update.component.scss']
+  styleUrls: ['./bets-update.component.scss'],
+  providers: [DatePipe]
 })
-export class BetsUpdateComponent implements OnInit {
+export class BetsUpdateComponent implements OnInit, OnDestroy {
   public bet: Bet = { title: null, description: null, categoryId: null, createdAt: null };
   public category: Category = { id: 1, description: null, name: null, sequence: null };
   public categories: Category[] = [{ description: null, id: null, name: null, sequence: null }];
+  private alertBtn$: Subscription;
   gql: `{
     bets(where: {id: {_eq: 10}}) {
       categoryId
@@ -50,8 +55,9 @@ export class BetsUpdateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private betsService: BetsService,
-    private apollo: Apollo,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appAlertService: AppAlertService,
+    private datePipe: DatePipe
   ) {
     this.contextMenu = [
       {
@@ -75,6 +81,10 @@ export class BetsUpdateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.alertBtn$ = this.appAlertService.onAction().subscribe(() => {
+      this.printSomething();
+    });
+
     this.getCategories();
     this.route.params.subscribe(value => {
       // tslint:disable-next-line: no-shadowed-variable
@@ -83,13 +93,19 @@ export class BetsUpdateComponent implements OnInit {
         if (this.bet.hasOwnProperty('__typename')) {
           // tslint:disable-next-line: no-string-literal
           delete this.bet['__typename'];
-          console.log(this.bet);
         }
         this.betsForm.setValue(this.bet);
       });
     });
     this.betsForm.setValue(this.betsService.bet);
+    this.betsForm
+      .get(['createdAt'])
+      .setValue(this.datePipe.transform(this.bet.createdAt, 'MM/dd/yyyy'));
     this.bet = this.betsService.bet;
+  }
+
+  ngOnDestroy(): void {
+    this.alertBtn$.unsubscribe();
   }
 
   public getCategories() {
@@ -98,7 +114,11 @@ export class BetsUpdateComponent implements OnInit {
     });
   }
 
-  updateBet() {
+  private printSomething() {
+    console.log('Fix');
+  }
+
+  public updateBet() {
     const bet = this.betsForm.getRawValue();
     this.betsService.updateBet(bet, this.category);
   }

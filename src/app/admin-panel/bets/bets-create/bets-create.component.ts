@@ -33,6 +33,7 @@ export class BetsCreateComponent implements OnInit {
     createdAt: [null, Validators.required],
     eventUrl: [null, Validators.required]
   });
+
   constructor(private apollo: Apollo, private fb: FormBuilder, private betsService: BetsService) {
     this.contextMenu = [
       {
@@ -63,6 +64,7 @@ export class BetsCreateComponent implements OnInit {
   public formToModel() {
     this.bet = this.betsForm.getRawValue();
   }
+
   public getCategories() {
     this.betsService.getCategories().subscribe(value => {
       this.categories = value.data.categories;
