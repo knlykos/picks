@@ -22,6 +22,7 @@ export class BetsCreateComponent implements OnInit {
     createdAt: null,
     eventUrl: null
   };
+  public basic = true;
   public category: Category = { id: 1, description: null, name: null, sequence: null };
   public categories: Category[] = [{ description: null, id: null, name: null, sequence: null }];
   public contextMenu: ContextMenu[] = [];

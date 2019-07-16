@@ -5,7 +5,7 @@ import { Bet } from 'src/app/models/bets';
 import { BetsService } from '../bets.service';
 import { ContextMenu } from 'src/app/models/context-menu';
 import { Apollo } from 'apollo-angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { AppAlertService } from '../../shared/app-alert/app-alert.service';
 import { Subscription } from 'rxjs';
@@ -57,7 +57,8 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
     private betsService: BetsService,
     private route: ActivatedRoute,
     private appAlertService: AppAlertService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router
   ) {
     this.contextMenu = [
       {
@@ -67,15 +68,16 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
         tooltip: 'Crear una nueva apuesta',
         url: [''],
         disabled: false,
-        functionName: 'insertBets'
+        functionName: 'updateBet'
       },
       {
         id: 'btn-update',
-        title: 'EDITAR',
+        title: 'CANCELAR',
         cssClass: 'btn',
         tooltip: 'Edita la apuesta seleccionada',
         url: ['update'],
-        disabled: true
+        disabled: false,
+        functionName: 'updateBet'
       }
     ];
   }
@@ -95,12 +97,15 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
           delete this.bet['__typename'];
         }
         this.betsForm.setValue(this.bet);
+        this.betsForm
+          .get('createdAt')
+          .setValue(this.datePipe.transform(value.data.bets[0].createdAt, 'MM/dd/yyyy'));
       });
     });
-    this.betsForm.setValue(this.betsService.bet);
-    this.betsForm
-      .get(['createdAt'])
-      .setValue(this.datePipe.transform(this.bet.createdAt, 'MM/dd/yyyy'));
+    // this.betsForm.setValue(this.betsService.bet);
+    // const data = this.betsForm
+    //   .get(['createdAt'])
+    //   .setValue(this.datePipe.transform(this.bet.createdAt, 'MM/dd/yyyy'));
     this.bet = this.betsService.bet;
   }
 
@@ -119,7 +124,11 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
   }
 
   public updateBet() {
-    const bet = this.betsForm.getRawValue();
+    const bet: Bet = this.betsForm.getRawValue();
     this.betsService.updateBet(bet, this.category);
+  }
+
+  public cancelBet() {
+    this.router.navigateByUrl('/admin/bets');
   }
 }

@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminPanelComponent } from './admin-panel/admin-panel/admin-panel.component';
 import { MainPanelComponent } from './dashboard/main-panel/main-panel.component';
+import { AdminDashboardComponent } from './admin-panel/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {
     path: 'admin',
-    component: AdminPanelComponent,
+    component: AdminDashboardComponent,
     loadChildren: () => import('./admin-panel/admin-panel.module').then(m => m.AdminPanelModule)
     // children: [
     //   { path: 'bets', component: BetsCreateComponent },

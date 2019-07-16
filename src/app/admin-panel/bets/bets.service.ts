@@ -14,7 +14,7 @@ export class BetsService {
   public bets: Bet[] = [];
   public category: Category;
   public contextMenu: ContextMenu[] = [];
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {}
 
   public betsListSubscription(): Observable<{ data: { bets: Bet[] } }> {
     return this.apollo.subscribe<Query>({
@@ -50,7 +50,7 @@ export class BetsService {
               description: "${this.bet.description}"
               eventUrl: "${this.bet.eventUrl}"
               title: "${this.bet.title}"
-              createdAt: "${this.bet.createdAt}"
+              createdAt: "${new Date(this.bet.createdAt).toJSON()}"
             }
           ) {
             returning {
@@ -117,7 +117,7 @@ export class BetsService {
               event: "${this.bet.event}"
               description: "${this.bet.description}"
               createdBy: ${this.bet.createdBy}
-              createdAt: "${this.bet.createdAt}"
+              createdAt: "${new Date(this.bet.createdAt).toJSON()}"
               categoryId: ${this.bet.categoryId}
             }
           ) {
