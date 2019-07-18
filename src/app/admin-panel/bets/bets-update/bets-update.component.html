@@ -1,8 +1,8 @@
 <nav style="position: sticky; top: 0;">
-  {{ betsForm.getRawValue() | json }}
+  <!-- {{ betsForm.getRawValue() | json }} -->
 
   <button
-    mat-button
+    mat-flat-button
     color="primary"
     [id]="contextMenu[0].id"
     [disabled]="contextMenu[0].disabled"
@@ -12,7 +12,7 @@
     {{ contextMenu[0].title }}
   </button>
   <button
-    mat-button
+    mat-flat-button
     [id]="contextMenu[1].id"
     [disabled]="contextMenu[1].disabled"
     [ngClass]="contextMenu[1].cssClass"

@@ -97,9 +97,9 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
           delete this.bet['__typename'];
         }
         this.betsForm.setValue(this.bet);
-        this.betsForm
-          .get('createdAt')
-          .setValue(this.datePipe.transform(value.data.bets[0].createdAt, 'MM/dd/yyyy'));
+        // this.betsForm
+        //   .get('createdAt')
+        //   .setValue(this.datePipe.transform(value.data.bets[0].createdAt, 'MM/dd/yyyy'));
       });
     });
     // this.betsForm.setValue(this.betsService.bet);
