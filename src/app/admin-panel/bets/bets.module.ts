@@ -13,9 +13,10 @@ import {
   MAT_DATE_LOCALE,
   MatNativeDateModule,
   MatSelectModule,
-  MatButtonModule
+  MatButtonModule,
+  MatListModule,
+  MatIconModule
 } from '@angular/material';
-
 
 @NgModule({
   declarations: [BetsCreateComponent, BetsListComponent, BetsUpdateComponent],
@@ -29,7 +30,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatListModule,
+    MatIconModule
   ],
   providers: [MatDatepickerModule, { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }]
 })

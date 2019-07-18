@@ -45,9 +45,8 @@ export class BetsListComponent implements OnInit {
     this.betsService.bet = this.selectedBet;
   }
 
-  selectionChanged($event: Bet) {
-    this.betsService.bet = $event;
-    this.contextMenu[1].disabled = false;
-    this.contextMenu[1].url = ['update', this.selectedBet.id.toString()];
+  selectionChanged(id: number) {
+    console.log(id);
+    this.contextMenu[1].url = ['update', id.toString()];
   }
 }

@@ -47,12 +47,12 @@ export class BetsCreateComponent implements OnInit {
         functionName: 'insertBets'
       },
       {
-        id: 'btn-update',
-        title: 'EDITAR',
+        id: 'btn-cancel',
+        title: 'CANCELAR',
         cssClass: 'btn',
-        tooltip: 'Edita la apuesta seleccionada',
-        url: ['update'],
-        disabled: true
+        tooltip: 'Cancela la apuesta actual',
+        url: ['/admin/bets'],
+        disabled: false
       }
     ];
     this.betsService.contextMenu = this.contextMenu;
