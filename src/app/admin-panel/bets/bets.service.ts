@@ -50,7 +50,7 @@ export class BetsService {
               description: "${this.bet.description}"
               eventUrl: "${this.bet.eventUrl}"
               title: "${this.bet.title}"
-              createdAt: "${this.bet.createdAt}"
+              createdAt: "${new Date(this.bet.createdAt).toJSON()}"
             }
           ) {
             returning {
