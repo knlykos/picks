@@ -21,11 +21,11 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
+        *ngIf="isHandset$"
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>realtimeapp</span>
+      <span>Realtime</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

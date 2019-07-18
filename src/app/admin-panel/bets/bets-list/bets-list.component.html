@@ -1,30 +1,25 @@
-<nav style="position: sticky; top: 0;">
-  <button
-    mat-stroked-button
-    [id]="menu.id"
-    [disabled]="menu.disabled"
-    [ngClass]="menu.cssClass"
-    [routerLink]="menu.url"
-    *ngFor="let menu of contextMenu"
-  >
-    {{ menu.title }}
-  </button>
-</nav>
-
 <mat-nav-list>
-  <h3 mat-subheader>Apuestas</h3>
   <mat-list-item
     [routerLink]="['/admin', 'bets', 'update', bet.id]"
     routerLinkActive="router-link-active"
     *ngFor="let bet of bets"
   >
     <h4 mat-line>{{ bet.title }}</h4>
-    <p mat-line>{{ bet.description }}</p>
+    <p mat-line>{{ bet.createdAt | date }}</p>
 
     <!-- <p mat-line>{{ bet.createdAt }}</p> -->
-    <p style="width: 120px">{{ bet.createdAt | date }}</p>
+    <p style="width: 200px; text-align: left">{{ bet.description }}</p>
   </mat-list-item>
 </mat-nav-list>
+<button
+  mat-fab
+  color="accent"
+  [routerLink]="['/admin/bets/create']"
+  routerLinkActive="router-link-active"
+  style="position: fixed; bottom: 16px; right: 16px;"
+>
+  <mat-icon>add</mat-icon>
+</button>
 <!-- <clr-datagrid
   [(clrDgSingleSelected)]="selectedBet"
   [clrDgRowSelection]="true"

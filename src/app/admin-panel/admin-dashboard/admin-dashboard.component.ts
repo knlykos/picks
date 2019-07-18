@@ -9,13 +9,12 @@ import { map, share } from 'rxjs/operators';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent {
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      share()
-    );
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(result => {
+      return result.matches;
+    }),
+    share()
+  );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
-
 }
