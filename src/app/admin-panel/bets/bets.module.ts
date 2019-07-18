@@ -15,7 +15,8 @@ import {
   MatSelectModule,
   MatButtonModule,
   MatListModule,
-  MatIconModule
+  MatIconModule,
+  MatToolbarModule
 } from '@angular/material';
 
 @NgModule({
@@ -32,7 +33,8 @@ import {
     MatSelectModule,
     MatButtonModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [MatDatepickerModule, { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }]
 })

@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { BetsService } from '../bets.service';
 import { ContextMenu } from 'src/app/models/context-menu';
 import { stringify } from '@angular/compiler/src/util';
+import { AdminPanelService } from '../../shared/admin-panel.service';
 
 @Component({
   selector: 'app-bets-create',
@@ -35,7 +36,12 @@ export class BetsCreateComponent implements OnInit {
     eventUrl: [null, Validators.required]
   });
 
-  constructor(private apollo: Apollo, private fb: FormBuilder, private betsService: BetsService) {
+  constructor(
+    private apollo: Apollo,
+    private fb: FormBuilder,
+    private betsService: BetsService,
+    private adminPanelService: AdminPanelService
+  ) {
     this.contextMenu = [
       {
         id: 'btn-save',
@@ -56,10 +62,27 @@ export class BetsCreateComponent implements OnInit {
       }
     ];
     this.betsService.contextMenu = this.contextMenu;
+    this.adminPanelService.toolbarStruct = [
+      {
+        id: 'guardar',
+        name: 'GUARDAR',
+        fnName: 'insertBets',
+        icon: null
+      },
+      {
+        id: 'cancelar',
+        name: 'CANCELAR',
+        fnName: 'cancel',
+        icon: null
+      }
+    ];
   }
 
   ngOnInit() {
     this.getCategories();
+    this.adminPanelService.onAction().subscribe(value => {
+      this[value]();
+    });
   }
 
   public formToModel() {
@@ -73,8 +96,8 @@ export class BetsCreateComponent implements OnInit {
   }
 
   public insertBets() {
-    this.formToModel();
-    const returnedValue = this.betsService.insertBets(this.bet, this.category);
-    console.log(returnedValue);
+    // this.formToModel();
+    // const returnedValue = this.betsService.insertBets(this.bet, this.category);
+    console.log('returnedValue');
   }
 }
