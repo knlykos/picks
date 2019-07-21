@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { BetsCreateComponent } from './bets-create/bets-create.component';
 import { BetsListComponent } from './bets-list/bets-list.component';
 import { BetsUpdateComponent } from './bets-update/bets-update.component';
-import { BetResolverService } from './../shared/resolvers/bet-resolver.service';
-import { BetsResolverService } from './../shared/resolvers/bets-resolver.service';
-import { CategoriesResolverService } from './../shared/resolvers/categories-resolver.service';
+import { BetResolverService } from '../shared/resolvers/bet-resolver.service';
+import { BetsResolverService } from '../shared/resolvers/bets-resolver.service';
+import { CategoriesResolverService } from '../shared/resolvers/categories-resolver.service';
 
 const routes: Routes = [
   {
