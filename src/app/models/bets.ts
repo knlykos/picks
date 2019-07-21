@@ -9,4 +9,5 @@ export interface Bet {
   siteId?: number;
   placeId?: number;
   eventUrl?: string;
+  eventDate?: Date;
 }
