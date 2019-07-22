@@ -1,0 +1,54 @@
+<!-- <mat-toolbar>
+  <mat-toolbar-row></mat-toolbar-row>
+</mat-toolbar> -->
+<mat-card style="margin: 0 10px; overflow-y: auto; height: calc(100% - 100px)">
+  <table>
+    <tr>
+      <th *ngFor="let item of eventsTableTitle" [ngStyle]="{ 'text-align': 'left' }">
+        {{ item.title }}
+      </th>
+    </tr>
+    <tr
+      *ngFor="let event of events"
+      style="cursor: pointer"
+      [routerLink]="['/admin', 'events', 'update', event.id]"
+    >
+      <td>{{ event.name }}</td>
+      <!-- <td>{{ event.description }}</td>
+      <td>{{ event.eventDate | date }}</td>
+      <td>{{ getCategoryById(event.categoryId) }}</td>
+      <td>{{ event.eventUrl }}</td>
+      <td><mat-icon>chevron_right</mat-icon></td> -->
+    </tr>
+  </table>
+
+  <!-- {{ categories | json }} -->
+</mat-card>
+<button
+  mat-fab
+  color="accent"
+  [routerLink]="['/admin/events/create']"
+  routerLinkActive="router-link-active"
+  style="position: fixed; bottom: 16px; right: 16px;"
+>
+  <mat-icon>add</mat-icon>
+</button>
+<!-- <clr-datagrid
+  [(clrDgSingleSelected)]="selectedEvent"
+  [clrDgRowSelection]="true"
+  (clrDgSingleSelectedChange)="selectionChanged($event)"
+>
+  <clr-dg-column>Código</clr-dg-column>
+  <clr-dg-column>Titulo</clr-dg-column>
+  <clr-dg-column>Descripción</clr-dg-column>
+  <clr-dg-column>Url del Evento</clr-dg-column>
+
+  <clr-dg-row *ngFor="let event of events" [clrDgItem]="event">
+    <clr-dg-cell>{{ event.id }}</clr-dg-cell>
+    <clr-dg-cell>{{ event.title }}</clr-dg-cell>
+    <clr-dg-cell>{{ event.description }}</clr-dg-cell>
+    <clr-dg-cell>{{ event.eventUrl }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>{{ events.length }} {{ events.length === 1 ? 'apuesta' : 'apuestas' }}</clr-dg-footer>
+</clr-datagrid> -->

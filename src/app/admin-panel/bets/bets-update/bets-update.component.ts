@@ -46,28 +46,7 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private appAlertService: AppAlertService,
     private router: Router
-  ) {
-    this.contextMenu = [
-      {
-        id: 'btn-save',
-        title: 'GUARDAR',
-        cssClass: 'btn btn-primary',
-        tooltip: 'Crear una nueva apuesta',
-        url: [''],
-        disabled: false,
-        functionName: 'updateBet'
-      },
-      {
-        id: 'btn-update',
-        title: 'CANCELAR',
-        cssClass: 'btn',
-        tooltip: 'Edita la apuesta seleccionada',
-        url: ['update'],
-        disabled: false,
-        functionName: 'updateBet'
-      }
-    ];
-  }
+  ) {}
 
   ngOnInit() {
     this.alertBtn$ = this.appAlertService.onAction().subscribe(() => {

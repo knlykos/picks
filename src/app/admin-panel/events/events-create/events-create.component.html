@@ -1,0 +1,42 @@
+<!-- <nav style="position: sticky; top: 0;">
+  <button
+    mat-flat-button
+    [id]="contextMenu[0].id"
+    [disabled]="contextMenu[0].disabled"
+    [ngClass]="contextMenu[0].cssClass"
+    (click)="insertEvents()"
+  >
+    {{ contextMenu[0].title }}
+  </button>
+  <button
+    mat-flat-button
+    [id]="contextMenu[1].id"
+    [disabled]="contextMenu[1].disabled"
+    [ngClass]="contextMenu[1].cssClass"
+    [routerLink]="['/admin/events']"
+  >
+    {{ contextMenu[1].title }}
+  </button>
+</nav> -->
+<!-- <mat-toolbar>
+  <mat-toolbar-row> </mat-toolbar-row>
+</mat-toolbar> -->
+<div class="card">
+  <div class="card-header">
+    Nuevo Evento
+  </div>
+  <div class="card-block">
+    <div class="card-title">
+      {{ this.event.name }}
+    </div>
+    <div class="card-text">
+      <form [formGroup]="eventsForm">
+        <mat-form-field appearance="standard">
+          <input  placeholder="Nombre" matInput id="name" type="text" name="name" formControlName="name" />
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <button class="btn btn-primary" (click)="insertEvents()">Save</button> -->

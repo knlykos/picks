@@ -38,12 +38,14 @@ export class BetsListComponent implements OnInit {
       {
         id: 'guardar',
         name: 'GUARDAR',
+        color: 'primary',
         fnName: 'insertBets',
         icon: null
       },
       {
         id: 'cancelar',
         name: 'CANCELAR',
+        color: '',
         fnName: 'cancel',
         icon: null
       }

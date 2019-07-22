@@ -7,6 +7,7 @@ import { AdminPanelService } from '../shared/admin-panel.service';
 export interface ToolbarStruct {
   id: string;
   name: string;
+  color: string;
   fnName: string;
   icon: string;
 }
@@ -32,12 +33,13 @@ export class AdminDashboardComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private adminPanelService: AdminPanelService
-  ) {}
-
-  ngOnInit() {
-    console.log(this.adminPanelService.toolbarStruct);
-    this.toolbarStruct = this.adminPanelService.toolbarStruct;
+  ) {
+    this.adminPanelService._toolbarStruct.subscribe(value => {
+      this.toolbarStruct = value;
+    });
   }
+
+  ngOnInit() {}
 
   private launchAction(fnName: string): void {
     this.adminPanelService._onAction.next(fnName);
