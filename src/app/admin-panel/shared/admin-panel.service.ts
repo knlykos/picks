@@ -10,6 +10,8 @@ export class AdminPanelService {
   public readonly _onAction = new Subject<string>();
   // tslint:disable-next-line: variable-name
   public readonly _toolbarStruct = new Subject<ToolbarStruct[]>();
+  // tslint:disable-next-line: variable-name
+  public readonly _spinner$ = new Subject<boolean>();
   toolbarStruct: ToolbarStruct[];
   constructor() {}
 
@@ -19,5 +21,9 @@ export class AdminPanelService {
 
   public toolbarStructFn() {
     return this._toolbarStruct.asObservable();
+  }
+
+  public spinner(): Observable<boolean> {
+    return this._spinner$.asObservable();
   }
 }

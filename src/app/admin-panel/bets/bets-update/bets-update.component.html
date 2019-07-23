@@ -9,63 +9,51 @@
   <p style="color: white">Cargando...</p>
 </ngx-spinner>
 
-<div class="card" *ngIf="isLoading === false">
-  <div class="card-header">
-    Nueva Apuesta
-  </div>
-  <div class="card-block">
-    <div class="card-title">
-      <!-- {{ this.bet.title }} -->
-    </div>
-    <div class="card-text">
-      <form [formGroup]="betsForm">
-        <mat-form-field class="example-full-width" appearance="standard">
-          <input matInput type="text" name="title" id="title" formControlName="title" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="standard">
-          <input
-            matInput
-            id="description"
-            type="text"
-            name="description"
-            formControlName="description"
-          />
-        </mat-form-field>
+<mat-card class="card" *ngIf="requestsCount === 2">
+  <div>
+    <form [formGroup]="betsForm">
+      <mat-form-field class="example-full-width" appearance="standard">
+        <input matInput type="text" name="title" id="title" formControlName="title" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="standard">
+        <input
+          matInput
+          id="description"
+          type="text"
+          name="description"
+          formControlName="description"
+        />
+      </mat-form-field>
 
-        <mat-form-field class="example-full-width" appearance="standard">
-          <input
-            [matDatepicker]="picker"
-            id="event-date"
-            matInput
-            name="date"
-            formControlName="eventDate"
-          />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="standard">
-          <input
-            matInput
-            id="event-url"
-            type="text"
-            placeholder="http://www.ejemplo.com"
-            name="event-url"
-            formControlName="eventUrl"
-          />
-        </mat-form-field>
-        <br />
-        <mat-form-field class="example-full-width" appearance="standard">
-          <mat-select
-            name="categories-selector"
-            id="category-selector"
-            formControlName="categoryId"
-          >
-            <mat-option [value]="category.id" *ngFor="let category of categories">{{
-              category.name
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
-    </div>
+      <mat-form-field class="example-full-width" appearance="standard">
+        <input
+          [matDatepicker]="picker"
+          id="event-date"
+          matInput
+          name="date"
+          formControlName="eventDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="standard">
+        <input
+          matInput
+          id="event-url"
+          type="text"
+          placeholder="http://www.ejemplo.com"
+          name="event-url"
+          formControlName="eventUrl"
+        />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="example-full-width" appearance="standard">
+        <mat-select name="categories-selector" id="category-selector" formControlName="categoryId">
+          <mat-option [value]="category.id" *ngFor="let category of categories">{{
+            category.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
   </div>
-</div>
+</mat-card>

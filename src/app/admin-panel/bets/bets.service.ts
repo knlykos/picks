@@ -108,11 +108,9 @@ export class BetsService {
 
   public updateBet(bet: Bet, category: Category) {
     this.bet = bet;
-    console.log(this.bet);
     this.category = category;
-    this.apollo
-      .mutate<Query>({
-        mutation: gql`
+    return this.apollo.mutate<Query>({
+      mutation: gql`
         mutation {
           update_bets(
             where: { id: { _eq: ${this.bet.id} } }
@@ -135,9 +133,6 @@ export class BetsService {
           }
         }
       `
-      })
-      .subscribe(value => {
-        console.log(value);
-      });
+    });
   }
 }

@@ -10,7 +10,6 @@ import { Category } from 'src/app/models/category';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AdminPanelService } from '../../shared/admin-panel.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -41,7 +40,6 @@ export class BetsListComponent implements OnInit {
     private betsService: BetsService,
     private route: ActivatedRoute,
     private adminPanelService: AdminPanelService,
-    private spinner: NgxSpinnerService
   ) {
     this.adminPanelService.toolbarStruct = [
       {
@@ -68,7 +66,8 @@ export class BetsListComponent implements OnInit {
   ngOnInit() {
     console.log(this.paginator);
     this.dataSource.paginator = this.paginator;
-    this.spinner.show();
+    // this.spinner.show();
+    this.adminPanelService._spinner$.next(true);
     // this.route.data.subscribe((data: { bets: { data: { bets: Bet[] } } }) => {
     //   this.bets = data.bets.data.bets;
     // });
@@ -77,7 +76,7 @@ export class BetsListComponent implements OnInit {
       this.dataSource.data = this.bets;
       this.requests += 1;
       if (this.requests === 2) {
-        this.spinner.hide();
+        this.adminPanelService._spinner$.next(false);
       }
     });
 
@@ -85,7 +84,7 @@ export class BetsListComponent implements OnInit {
       this.categories = value.data.categories;
       this.requests += 1;
       if (this.requests === 2) {
-        this.spinner.hide();
+        this.adminPanelService._spinner$.next(false);
       }
     });
     // this.route.data.subscribe((data: { categories: { data: { categories: Category[] } } }) => {

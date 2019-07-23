@@ -10,7 +10,7 @@
 </ngx-spinner>
 <mat-card
   style="margin: 0 10px; overflow-y: auto;"
-  [ngStyle]="{ display: requests === 2 ? 'hidden' : '' }"
+  [ngStyle]="{ visibility: requests === 2 ? 'visible' : 'hidden' }"
 >
   <!-- <table>
     <tr>
@@ -36,6 +36,7 @@
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID</th>
       <td
+        matRipple
         [routerLink]="['/admin', 'bets', 'update', element.id]"
         mat-cell
         *matCellDef="let element"
@@ -46,6 +47,7 @@
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Apuesta</th>
       <td
+        matRipple
         [routerLink]="['/admin', 'bets', 'update', element.id]"
         mat-cell
         *matCellDef="let element"
@@ -56,6 +58,7 @@
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef>Descripción</th>
       <td
+        matRipple
         [routerLink]="['/admin', 'bets', 'update', element.id]"
         mat-cell
         *matCellDef="let element"
@@ -66,6 +69,7 @@
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef>Descripción</th>
       <td
+        matRipple
         [routerLink]="['/admin', 'bets', 'update', element.id]"
         mat-cell
         *matCellDef="let element"
@@ -76,6 +80,7 @@
     <ng-container matColumnDef="eventUrl">
       <th mat-header-cell *matHeaderCellDef>URL</th>
       <td
+        matRipple
         [routerLink]="['/admin', 'bets', 'update', element.id]"
         mat-cell
         *matCellDef="let element"
@@ -84,7 +89,7 @@
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="betsTitle"></tr>
-    <tr mat-row *matRowDef="let row; columns: betsTitle"></tr>
+    <tr mat-row *matRowDef="let row; columns: betsTitle" style="cursor: pointer;"></tr>
   </table>
 
   <mat-paginator

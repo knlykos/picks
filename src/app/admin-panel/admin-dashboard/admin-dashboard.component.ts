@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 import { AdminPanelService } from '../shared/admin-panel.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export interface ToolbarStruct {
   id: string;
@@ -32,14 +33,23 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private adminPanelService: AdminPanelService
+    private adminPanelService: AdminPanelService,
+    private spinner: NgxSpinnerService
   ) {
     this.adminPanelService._toolbarStruct.subscribe(value => {
       this.toolbarStruct = value;
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.adminPanelService._spinner$.subscribe(value => {
+      if (value === true) {
+        this.spinner.show();
+      } else {
+        this.spinner.hide();
+      }
+    });
+  }
 
   private launchAction(fnName: string): void {
     this.adminPanelService._onAction.next(fnName);
