@@ -100,7 +100,7 @@ export class BetsListComponent implements OnInit {
   }
 
   getCategoryById(categoryId: number): string {
-    let categoryName = 'Sin cantegoría';
+    let categoryName = 'Sin categoría';
     this.categories.map(v => {
       if (v.id === categoryId) {
         categoryName = v.name;
