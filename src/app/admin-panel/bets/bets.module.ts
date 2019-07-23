@@ -7,6 +7,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { BetsListComponent } from './bets-list/bets-list.component';
 import { BetsUpdateComponent } from './bets-update/bets-update.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 import {
   MatInputModule,
   MatDatepickerModule,
@@ -19,7 +21,8 @@ import {
   MatToolbarModule,
   MatDividerModule,
   MatCardModule,
-  MatRippleModule
+  MatRippleModule,
+  MatTableModule
 } from '@angular/material';
 
 @NgModule({
@@ -40,7 +43,9 @@ import {
     MatToolbarModule,
     MatDividerModule,
     MatCardModule,
-    MatRippleModule
+    MatRippleModule,
+    NgxSpinnerModule,
+    MatTableModule
   ],
   providers: [MatDatepickerModule, { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }]
 })

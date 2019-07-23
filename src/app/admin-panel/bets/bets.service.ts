@@ -27,7 +27,6 @@ export class BetsService {
             createdAt
             createdBy
             description
-            event
             eventUrl
             id
             placeId
@@ -77,7 +76,6 @@ export class BetsService {
           createdAt
           createdBy
           description
-          event
           eventDate
           eventUrl
           id
@@ -123,7 +121,6 @@ export class BetsService {
               siteId: ${this.bet.siteId}
               placeId: ${this.bet.placeId}
               eventUrl: "${this.bet.eventUrl}"
-              event: "${this.bet.event}"
               description: "${this.bet.description}"
               createdBy: ${this.bet.createdBy}
               createdAt: "${new Date().toJSON()}"

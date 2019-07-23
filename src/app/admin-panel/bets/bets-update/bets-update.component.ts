@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { BetsResolverReturn } from '../../shared/resolvers/bets-resolver.service';
 import { BetResolverReturn } from '../../shared/resolvers/bet-resolver.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AdminPanelService } from '../../shared/admin-panel.service';
 
 @Component({
   selector: 'app-bets-update',
@@ -20,6 +22,7 @@ import { BetResolverReturn } from '../../shared/resolvers/bet-resolver.service';
   providers: [DatePipe]
 })
 export class BetsUpdateComponent implements OnInit, OnDestroy {
+  public isLoading: boolean;
   public bet: Bet = { title: null, description: null, categoryId: null, createdAt: null };
   public category: Category = { id: 1, description: null, name: null, sequence: null };
   public categories: Category[] = [{ description: null, id: null, name: null, sequence: null }];
@@ -35,7 +38,6 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
     createdAt: [null],
     createdBy: [null],
     eventUrl: [null, Validators.required],
-    event: [null],
     placeId: [null],
     siteId: [null],
     eventDate: [null, Validators.required]
@@ -44,37 +46,48 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private betsService: BetsService,
     private route: ActivatedRoute,
-    private appAlertService: AppAlertService,
-    private router: Router
-  ) {}
+    private adminPanelService: AdminPanelService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {
+    this.adminPanelService._toolbarStruct.next([
+      { id: 'update', color: 'primary', fnName: 'updateBet', icon: '', name: 'ACTUALIZAR' },
+      { id: 'cancel', color: '', fnName: 'cancelBet', icon: '', name: 'CANCELAR' }
+    ]);
+
+    this.adminPanelService.onAction().subscribe(value => {
+      this[value]();
+    });
+  }
 
   ngOnInit() {
-    this.alertBtn$ = this.appAlertService.onAction().subscribe(() => {
-      this.printSomething();
-    });
+    this.isLoading = true;
+    this.spinner.show();
 
     this.getCategories();
 
-    this.route.data.subscribe((data: BetResolverReturn) => {
-      this.bet = data.bets.data.bets[0];
-      if (this.bet.hasOwnProperty('__typename')) {
-        // tslint:disable-next-line: no-string-literal
-        delete this.bet['__typename'];
-      }
-      this.betsForm.setValue(this.bet);
-    });
-
-    // this.route.params.subscribe(value => {
-    //   // tslint:disable-next-line: no-shadowed-variable
-    //   this.betsService.getBetsById(Number(value.id)).subscribe(value => {
-    //     this.bet = value.data.bets[0];
-    //     if (this.bet.hasOwnProperty('__typename')) {
-    //       // tslint:disable-next-line: no-string-literal
-    //       delete this.bet['__typename'];
-    //     }
-    //     this.betsForm.setValue(this.bet);
-    //   });
+    // this.route.data.subscribe((data: BetResolverReturn) => {
+    //   this.bet = data.bets.data.bets[0];
+    //   if (this.bet.hasOwnProperty('__typename')) {
+    //     // tslint:disable-next-line: no-string-literal
+    //     delete this.bet['__typename'];
+    //   }
+    //   this.betsForm.setValue(this.bet);
     // });
+
+    this.route.params.subscribe(value => {
+      // tslint:disable-next-line: no-shadowed-variable
+      this.betsService.getBetsById(Number(value.id)).subscribe(value => {
+        this.bet = value.data.bets[0];
+        if (this.bet.hasOwnProperty('__typename')) {
+          // tslint:disable-next-line: no-string-literal
+          delete this.bet['__typename'];
+        }
+        this.betsForm.setValue(this.bet);
+        this.isLoading = false;
+        this.spinner.hide();
+      });
+    });
     // this.betsForm.setValue(this.betsService.bet);
     // const data = this.betsForm
     //   .get(['createdAt'])

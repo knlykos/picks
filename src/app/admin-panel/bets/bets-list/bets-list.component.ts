@@ -10,6 +10,7 @@ import { Category } from 'src/app/models/category';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AdminPanelService } from '../../shared/admin-panel.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-bets-list',
@@ -17,6 +18,7 @@ import { AdminPanelService } from '../../shared/admin-panel.service';
   styleUrls: ['./bets-list.component.scss']
 })
 export class BetsListComponent implements OnInit {
+  public  requests = 0;
   public selectedBet: Bet = null;
   public betsTableTitle: TableTitle[] = [
     { title: 'Apuesta', icon: null, style: 'text-align: right' },
@@ -32,7 +34,8 @@ export class BetsListComponent implements OnInit {
     private apollo: Apollo,
     private betsService: BetsService,
     private route: ActivatedRoute,
-    private adminPanelService: AdminPanelService
+    private adminPanelService: AdminPanelService,
+    private spinner: NgxSpinnerService
   ) {
     this.adminPanelService.toolbarStruct = [
       {
@@ -53,34 +56,32 @@ export class BetsListComponent implements OnInit {
     // this.betsService.getCategories().subscribe(value => {
     //   this.categories = value.data.categories;
     // });
-    this.contextMenu = [
-      {
-        id: 'btn-new',
-        title: 'NUEVO',
-        cssClass: 'btn btn-primary',
-        tooltip: 'Crear una nueva apuesta',
-        url: ['create'],
-        disabled: false
-      },
-      {
-        id: 'btn-edit',
-        title: 'EDITAR',
-        cssClass: 'btn',
-        tooltip: 'Edita la apuesta seleccionada',
-        url: ['update'],
-        disabled: true
-      }
-    ];
     this.betsService.contextMenu = this.contextMenu;
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { bets: { data: { bets: Bet[] } } }) => {
-      this.bets = data.bets.data.bets;
+    this.spinner.show();
+    // this.route.data.subscribe((data: { bets: { data: { bets: Bet[] } } }) => {
+    //   this.bets = data.bets.data.bets;
+    // });
+    this.betsService.betsListSubscription().subscribe(value => {
+      this.bets = value.data.bets;
+      this.requests += 1;
+      if (this.requests === 2) {
+        this.spinner.hide();
+      }
     });
-    this.route.data.subscribe((data: { categories: { data: { categories: Category[] } } }) => {
-      this.categories = data.categories.data.categories;
+
+    this.betsService.getCategories().subscribe(value => {
+      this.categories = value.data.categories;
+      this.requests += 1;
+      if (this.requests === 2) {
+        this.spinner.hide();
+      }
     });
+    // this.route.data.subscribe((data: { categories: { data: { categories: Category[] } } }) => {
+    //   this.categories = data.categories.data.categories;
+    // });
   }
   goToUpdate() {
     this.betsService.bet = this.selectedBet;
