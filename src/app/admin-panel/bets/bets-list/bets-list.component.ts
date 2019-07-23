@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Query, Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Bet } from 'src/app/models/bets';
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AdminPanelService } from '../../shared/admin-panel.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-bets-list',
@@ -18,18 +19,23 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./bets-list.component.scss']
 })
 export class BetsListComponent implements OnInit {
-  public  requests = 0;
+  public requests = 0;
   public selectedBet: Bet = null;
   public betsTableTitle: TableTitle[] = [
+    { title: 'id', icon: null, style: 'text-align: right' },
     { title: 'Apuesta', icon: null, style: 'text-align: right' },
     { title: 'Ganador', icon: null, style: 'text-align: right' },
     { title: 'Fecha', icon: null, style: 'text-align: right' },
-    { title: 'Categoria', icon: null, style: 'text-align: right' },
+    // { title: 'Categoria', icon: null, style: 'text-align: right' },
     { title: 'URL', icon: null, style: 'text-align: right' }
   ];
+
+  public betsTitle = ['id', 'title', 'description', 'category', 'eventUrl'];
   public bets: Bet[] = [];
+  public dataSource = new MatTableDataSource<Bet>(this.bets);
   public contextMenu: ContextMenu[] = [];
   public categories: Category[];
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(
     private apollo: Apollo,
     private betsService: BetsService,
@@ -60,12 +66,15 @@ export class BetsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.paginator);
+    this.dataSource.paginator = this.paginator;
     this.spinner.show();
     // this.route.data.subscribe((data: { bets: { data: { bets: Bet[] } } }) => {
     //   this.bets = data.bets.data.bets;
     // });
     this.betsService.betsListSubscription().subscribe(value => {
       this.bets = value.data.bets;
+      this.dataSource.data = this.bets;
       this.requests += 1;
       if (this.requests === 2) {
         this.spinner.hide();

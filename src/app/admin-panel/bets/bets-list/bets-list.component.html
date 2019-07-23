@@ -9,8 +9,8 @@
   <p style="color: white">Cargando...</p>
 </ngx-spinner>
 <mat-card
-  style="margin: 0 10px; overflow-y: auto; height: calc(100% - 100px)"
-  *ngIf="requests === 2"
+  style="margin: 0 10px; overflow-y: auto;"
+  [ngStyle]="{ display: requests === 2 ? 'hidden' : '' }"
 >
   <!-- <table>
     <tr>
@@ -32,26 +32,66 @@
     </tr>
   </table> -->
 
-  <table mat-table [dataSource]="bets">
+  <table mat-table [dataSource]="dataSource" style="width: 100%;">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td
+        [routerLink]="['/admin', 'bets', 'update', element.id]"
+        mat-cell
+        *matCellDef="let element"
+      >
+        {{ element.id }}
+      </td>
+    </ng-container>
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Apuesta</th>
-      <td mat-cell *matCellDef="let element">{{element.title}}</td>
+      <td
+        [routerLink]="['/admin', 'bets', 'update', element.id]"
+        mat-cell
+        *matCellDef="let element"
+      >
+        {{ element.title }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef>Descripción</th>
-      <td mat-cell *matCellDef="let element">{{element.description}}</td>
+      <td
+        [routerLink]="['/admin', 'bets', 'update', element.id]"
+        mat-cell
+        *matCellDef="let element"
+      >
+        {{ element.description }}
+      </td>
     </ng-container>
-    <!-- <ng-container matColumnDef="categoryId">
-      <th mat-header-cell *matHeaderCellDef>Categoría</th>
-      <td mat-cell *matCellDef="let element">{{ getCategoryById(element.categoryId) }}</td>
-    </ng-container> -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>Descripción</th>
+      <td
+        [routerLink]="['/admin', 'bets', 'update', element.id]"
+        mat-cell
+        *matCellDef="let element"
+      >
+        {{ getCategoryById(element.categoryId) }}
+      </td>
+    </ng-container>
     <ng-container matColumnDef="eventUrl">
       <th mat-header-cell *matHeaderCellDef>URL</th>
-      <td mat-cell *matCellDef="let element">{{element.eventUrl}}</td>
+      <td
+        [routerLink]="['/admin', 'bets', 'update', element.id]"
+        mat-cell
+        *matCellDef="let element"
+      >
+        {{ element.eventUrl }}
+      </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="betsTableTitle"></tr>
-    <tr mat-row *matRowDef="let row; columns: betsTableTitle;"></tr>
+    <tr mat-header-row *matHeaderRowDef="betsTitle"></tr>
+    <tr mat-row *matRowDef="let row; columns: betsTitle"></tr>
   </table>
+
+  <mat-paginator
+    #materialPaginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
 </mat-card>
 <button
   mat-fab

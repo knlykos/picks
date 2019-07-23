@@ -22,7 +22,8 @@ import {
   MatDividerModule,
   MatCardModule,
   MatRippleModule,
-  MatTableModule
+  MatTableModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 @NgModule({
@@ -45,7 +46,8 @@ import {
     MatCardModule,
     MatRippleModule,
     NgxSpinnerModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [MatDatepickerModule, { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }]
 })
