@@ -67,7 +67,7 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef>Descripción</th>
+      <th mat-header-cell *matHeaderCellDef>Categoría</th>
       <td
         matRipple
         [routerLink]="['/admin', 'bets', 'update', element.id]"
@@ -75,6 +75,17 @@
         *matCellDef="let element"
       >
         {{ getCategoryById(element.categoryId) }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+      <td
+        matRipple
+        [routerLink]="['/admin', 'bets', 'update', element.id]"
+        mat-cell
+        *matCellDef="let element"
+      >
+        {{ element.eventDate | date }}
       </td>
     </ng-container>
     <ng-container matColumnDef="eventUrl">

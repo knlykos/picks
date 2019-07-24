@@ -9,6 +9,7 @@ import { BetsService } from '../bets.service';
 import { ContextMenu } from 'src/app/models/context-menu';
 import { stringify } from '@angular/compiler/src/util';
 import { AdminPanelService } from '../../shared/admin-panel.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bets-create',
@@ -40,7 +41,8 @@ export class BetsCreateComponent implements OnInit {
     private apollo: Apollo,
     private fb: FormBuilder,
     private betsService: BetsService,
-    private adminPanelService: AdminPanelService
+    private adminPanelService: AdminPanelService,
+    private router: Router
   ) {
     this.contextMenu = [
       {
@@ -62,7 +64,7 @@ export class BetsCreateComponent implements OnInit {
       }
     ];
     this.betsService.contextMenu = this.contextMenu;
-    this.adminPanelService.toolbarStruct = [
+    this.adminPanelService._toolbarStruct.next([
       {
         id: 'guardar',
         name: 'GUARDAR',
@@ -73,11 +75,11 @@ export class BetsCreateComponent implements OnInit {
       {
         id: 'cancelar',
         name: 'CANCELAR',
-        color: 'primary',
+        color: '',
         fnName: 'cancel',
         icon: null
       }
-    ];
+    ]);
   }
 
   ngOnInit() {
@@ -107,5 +109,10 @@ export class BetsCreateComponent implements OnInit {
     this.formToModel();
 
     const returnedValue = this.betsService.insertBets(this.bet, this.category);
+    this.router.navigateByUrl('/admin/bets');
+  }
+
+  public cancel() {
+    this.router.navigateByUrl('/admin/bets');
   }
 }

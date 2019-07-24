@@ -22,7 +22,7 @@ export class BetsService {
     return this.apollo.subscribe<Query>({
       query: gql`
         subscription {
-          bets {
+          bets(order_by: { id: desc }) {
             categoryId
             createdAt
             createdBy
@@ -123,7 +123,7 @@ export class BetsService {
               createdBy: ${this.bet.createdBy}
               createdAt: "${new Date().toJSON()}"
               categoryId: ${this.bet.categoryId}
-              eventDate: "${new Date(this.bet.createdAt).toJSON()}"
+              eventDate: "${new Date(this.bet.eventDate).toJSON()}"
             }
           ) {
             returning {

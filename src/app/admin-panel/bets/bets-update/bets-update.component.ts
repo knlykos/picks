@@ -111,15 +111,12 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
     });
   }
 
-  private printSomething() {
-    console.log('Fix');
-  }
-
   public updateBet() {
     const bet: Bet = this.betsForm.getRawValue();
     this.betsService.updateBet(bet, this.category).subscribe(value => {
       // console.log(value.data.update_bets.returning[0].id);
       const title = value.data.update_bets.returning[0].title;
+
       this.snackbar.open('Se actualizó la apuesta: ' + title, 'CERRAR', {
         horizontalPosition: 'left',
         duration: 5000
@@ -129,6 +126,7 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
   }
 
   public cancelBet() {
+    this.spinner.show();
     this.snackbar.open('No se realizo algún cambio', 'CERRAR', {
       horizontalPosition: 'left',
       duration: 5000

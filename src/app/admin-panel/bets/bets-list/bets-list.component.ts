@@ -29,7 +29,7 @@ export class BetsListComponent implements OnInit {
     { title: 'URL', icon: null, style: 'text-align: right' }
   ];
 
-  public betsTitle = ['id', 'title', 'description', 'category', 'eventUrl'];
+  public betsTitle = ['id', 'title', 'description', 'category', 'date', 'eventUrl'];
   public bets: Bet[] = [];
   public dataSource = new MatTableDataSource<Bet>(this.bets);
   public contextMenu: ContextMenu[] = [];
@@ -39,7 +39,7 @@ export class BetsListComponent implements OnInit {
     private apollo: Apollo,
     private betsService: BetsService,
     private route: ActivatedRoute,
-    private adminPanelService: AdminPanelService,
+    private adminPanelService: AdminPanelService
   ) {
     this.adminPanelService.toolbarStruct = [
       {
@@ -60,7 +60,6 @@ export class BetsListComponent implements OnInit {
     // this.betsService.getCategories().subscribe(value => {
     //   this.categories = value.data.categories;
     // });
-    this.betsService.contextMenu = this.contextMenu;
   }
 
   ngOnInit() {
