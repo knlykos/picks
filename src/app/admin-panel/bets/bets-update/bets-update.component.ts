@@ -113,8 +113,10 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
 
   public updateBet() {
     const bet: Bet = this.betsForm.getRawValue();
+    this.adminPanelService._spinner$.next(true);
     this.betsService.updateBet(bet, this.category).subscribe(value => {
       // console.log(value.data.update_bets.returning[0].id);
+
       const title = value.data.update_bets.returning[0].title;
 
       this.snackbar.open('Se actualizó la apuesta: ' + title, 'CERRAR', {

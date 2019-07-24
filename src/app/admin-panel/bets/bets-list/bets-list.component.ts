@@ -41,22 +41,7 @@ export class BetsListComponent implements OnInit {
     private route: ActivatedRoute,
     private adminPanelService: AdminPanelService
   ) {
-    this.adminPanelService.toolbarStruct = [
-      {
-        id: 'guardar',
-        name: 'GUARDAR',
-        color: 'primary',
-        fnName: 'insertBets',
-        icon: null
-      },
-      {
-        id: 'cancelar',
-        name: 'CANCELAR',
-        color: '',
-        fnName: 'cancel',
-        icon: null
-      }
-    ];
+    this.adminPanelService._toolbarStruct.next([]);
     // this.betsService.getCategories().subscribe(value => {
     //   this.categories = value.data.categories;
     // });

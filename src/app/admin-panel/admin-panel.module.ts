@@ -15,7 +15,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatMenuModule, MatDividerModule } from '@angular/material';
+import {
+  MatMenuModule,
+  MatDividerModule,
+  MatFormFieldModule,
+  MatInputModule
+} from '@angular/material';
 import { NgxSpinnerModule } from 'ngx-spinner';
 // import { TeamsCreateComponent } from './teams-create/teams-create.component';
 
@@ -42,7 +47,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatListModule,
     MatMenuModule,
     MatDividerModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class AdminPanelModule {}
