@@ -29,3 +29,29 @@
 .mat-toolbar-spacer {
   flex: 1 1 auto;
 }
+
+.gb_QeaSVJYc-G0jgYd-ZMv3u {
+  display: flex;
+  flex-direction: row;
+  .gb_mf {
+  }
+  div {
+    input {
+      min-width: 125px;
+      border-top: 1px solid #eee;
+      border-right: 0px;
+      border-left: 0px;
+      border-bottom: 1px solid #eee;
+      transition: border-color 0.5s ease-out;
+      background: #00000017;
+      height: 40px;
+      width: 300px;
+      font-family: 'roboto';
+      font-size: 16px;
+      font-weight: 400;
+      &:focus {
+        outline: unset;
+      }
+    }
+  }
+}
