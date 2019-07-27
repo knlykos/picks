@@ -9,10 +9,10 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="admin/bets">Apuestas</a>
-      <a mat-list-item href="admin/teams">Equipos</a>
-      <a mat-list-item href="admin/categories">Categorías</a>
-      <a mat-list-item href="admin/events">Eventos</a>
+      <a mat-list-item [routerLink]="['/admin/bets']" routerLinkActive="active">Apuestas</a>
+      <a mat-list-item [routerLink]="['/admin/teams']" routerLinkActive="active">Equipos</a>
+      <a mat-list-item [routerLink]="['/admin/categories']" routerLinkActive="active">Categorías</a>
+      <a mat-list-item [routerLink]="['/admin/events']" routerLinkActive="active">Eventos</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
