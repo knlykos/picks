@@ -48,7 +48,6 @@ export class BetsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.paginator);
     this.dataSource.paginator = this.paginator;
     // this.spinner.show();
     this.adminPanelService._spinner$.next(true);
