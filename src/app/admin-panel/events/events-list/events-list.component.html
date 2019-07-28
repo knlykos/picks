@@ -2,7 +2,7 @@
   <mat-toolbar-row></mat-toolbar-row>
 </mat-toolbar> -->
 <mat-card style="margin: 0 10px; overflow-y: auto; height: calc(100% - 100px)">
-  <table>
+  <!-- <table>
     <tr>
       <th *ngFor="let item of eventsTableTitle" [ngStyle]="{ 'text-align': 'left' }">
         {{ item.title }}
@@ -14,13 +14,20 @@
       [routerLink]="['/admin', 'events', 'update', event.id]"
     >
       <td>{{ event.name }}</td>
-      <!-- <td>{{ event.description }}</td>
-      <td>{{ event.eventDate | date }}</td>
-      <td>{{ getCategoryById(event.categoryId) }}</td>
-      <td>{{ event.eventUrl }}</td>
-      <td><mat-icon>chevron_right</mat-icon></td> -->
     </tr>
-  </table>
+  </table> -->
+  <mat-nav-list>
+    <h3 mat-subheader>Eventos</h3>
+    <mat-list-item
+      [routerLink]="['/admin', 'events', 'update', event.id]"
+      *ngFor="let event of events"
+    >
+      <mat-icon mat-list-icon>receipt</mat-icon>
+
+      <!-- <h4 mat-line>Nombre del Evento</h4> -->
+      <p mat-line>{{ event.name }}</p>
+    </mat-list-item>
+  </mat-nav-list>
 
   <!-- {{ categories | json }} -->
 </mat-card>

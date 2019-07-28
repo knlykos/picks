@@ -8,6 +8,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent,
+    // ruta del panel de admin ver mas en https://angular.io/guide/ngmodules
     loadChildren: () => import('./admin-panel/admin-panel.module').then(m => m.AdminPanelModule)
     // children: [
     //   { path: 'bets', component: BetsCreateComponent },

@@ -19,8 +19,10 @@ import {
   MatToolbarModule,
   MatDividerModule,
   MatCardModule,
-  MatRippleModule
+  MatRippleModule,
+  MatSnackBarModule
 } from '@angular/material';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [EventsCreateComponent, EventsListComponent, EventsUpdateComponent],
@@ -40,7 +42,9 @@ import {
     MatToolbarModule,
     MatDividerModule,
     MatCardModule,
-    MatRippleModule
+    MatRippleModule,
+    NgxSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [MatDatepickerModule, { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }]
 })

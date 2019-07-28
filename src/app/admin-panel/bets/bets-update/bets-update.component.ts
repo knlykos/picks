@@ -15,6 +15,7 @@ import { BetResolverReturn } from '../../shared/resolvers/bet-resolver.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AdminPanelService } from '../../shared/admin-panel.service';
 import { MatSnackBar } from '@angular/material';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-bets-update',
@@ -47,6 +48,7 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
     private betsService: BetsService,
     private route: ActivatedRoute,
     private adminPanelService: AdminPanelService,
+    private appService: AppService,
     private router: Router,
     private spinner: NgxSpinnerService,
     private snackbar: MatSnackBar
@@ -62,7 +64,7 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.adminPanelService._spinner$.next(true);
+    this.appService.show();
 
     this.getCategories();
 
@@ -97,7 +99,7 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
   private hideSpinner() {
     this.requestsCount += 1;
     if (this.requestsCount === 2) {
-      this.adminPanelService._spinner$.next(false);
+      this.appService.hide();
     }
   }
   public getCategories() {
@@ -113,13 +115,13 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
 
   public updateBet() {
     const bet: Bet = this.betsForm.getRawValue();
-    this.adminPanelService._spinner$.next(true);
+    this.appService.show();
     this.betsService.updateBet(bet, this.category).subscribe(value => {
       // console.log(value.data.update_bets.returning[0].id);
 
       const title = value.data.update_bets.returning[0].title;
 
-      this.snackbar.open('Se actualizó la apuesta: ' + title, 'CERRAR', {
+      this.snackbar.open('Se actualizó la apuesta: ' + title, '', {
         horizontalPosition: 'left',
         duration: 5000
       });
@@ -129,7 +131,7 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
 
   public cancelBet() {
     this.spinner.show();
-    this.snackbar.open('No se realizo algún cambio', 'CERRAR', {
+    this.snackbar.open('No se realizo algún cambio', '', {
       horizontalPosition: 'left',
       duration: 5000
     });

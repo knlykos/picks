@@ -1,49 +1,47 @@
-<!-- <nav style="position: sticky; top: 0;">
-  <button
-    mat-flat-button
-    [id]="contextMenu[0].id"
-    [disabled]="contextMenu[0].disabled"
-    [ngClass]="contextMenu[0].cssClass"
-    (click)="insertBets()"
-  >
-    {{ contextMenu[0].title }}
-  </button>
-  <button
-    mat-flat-button
-    [id]="contextMenu[1].id"
-    [disabled]="contextMenu[1].disabled"
-    [ngClass]="contextMenu[1].cssClass"
-    [routerLink]="['/admin/bets']"
-  >
-    {{ contextMenu[1].title }}
-  </button>
-</nav> -->
-<!-- <mat-toolbar>
-  <mat-toolbar-row> </mat-toolbar-row>
-</mat-toolbar> -->
-<div class="card">
-  <div class="card-header">
-    Nueva Apuesta
-  </div>
-  <div class="card-block">
-    <div class="card-title">
-      {{ this.bet.title }}
-    </div>
-    <div class="card-text">
-      <form [formGroup]="betsForm">
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title> Apuesta Nueva</mat-card-title>
+    <mat-card-subtitle>
+      {{
+        this.betsForm.get('title').value === null || this.betsForm.get('title').value === ''
+          ? 'Titulo de Apuesta'
+          : this.betsForm.get('title').value
+      }}</mat-card-subtitle
+    >
+  </mat-card-header>
+  <!-- <mat-card-content> -->
+  <form [formGroup]="betsForm">
+    <div class="row column-margin">
+      <div class="column">
         <mat-form-field appearance="standard">
-          <input matInput type="text" name="title" id="title" formControlName="title" />
+          <input
+            matInput
+            type="text"
+            name="title"
+            placeholder="Titulo"
+            id="title"
+            formControlName="title"
+          />
         </mat-form-field>
+      </div>
+      <div class="column">
         <mat-form-field appearance="standard">
           <input
             matInput
             id="description"
             type="text"
             name="description"
+            placeholder="Descripción"
             formControlName="description"
           />
         </mat-form-field>
+      </div>
+    </div>
+    <div class="row column-margin">
+      <div class="column">
         <mat-form-field appearance="standard">
+          <mat-label>Fecha</mat-label>
           <input
             matInput
             id="event-date"
@@ -54,6 +52,8 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+      </div>
+      <div class="column">
         <mat-form-field appearance="standard">
           <input
             matInput
@@ -64,8 +64,9 @@
             formControlName="eventUrl"
           />
         </mat-form-field>
-        <br />
-        <mat-form-field class="example-full-width" appearance="standard">
+      </div>
+      <div class="column">
+        <mat-form-field appearance="standard">
           <mat-select
             name="categories-selector"
             id="category-selector"
@@ -76,13 +77,15 @@
             }}</mat-option>
           </mat-select>
         </mat-form-field>
-      </form>
+      </div>
     </div>
-  </div>
-</div>
+    <br />
+  </form>
+  <!-- </mat-card-content> -->
+</mat-card>
 
-<pre class="datepicker-output">
+<!-- <pre class="datepicker-output">
     {{ betsForm.getRawValue() | json }}
-</pre>
+</pre> -->
 
 <!-- <button class="btn btn-primary" (click)="insertBets()">Save</button> -->

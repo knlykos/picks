@@ -1,17 +1,13 @@
-<div class="card">
-  <div class="card-header">
-    Nueva Apuesta
-  </div>
-  <div class="card-block">
-    <div class="card-title">
-      <!-- {{ this.event.title }} -->
-    </div>
-    <div class="card-text">
-      <form [formGroup]="eventsForm">
+<mat-card>
+  <mat-card-header><mat-card-title>Actualización de Evento</mat-card-title> </mat-card-header>
+  <form [formGroup]="eventsForm">
+    <div class="row">
+      <div class="column">
         <mat-form-field class="example-full-width" appearance="standard">
+          <mat-label></mat-label>
           <input matInput type="text" name="name" id="title" formControlName="name" />
         </mat-form-field>
-      </form>
+      </div>
     </div>
-  </div>
-</div>
+  </form>
+</mat-card>

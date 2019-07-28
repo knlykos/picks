@@ -12,6 +12,8 @@ import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { EventResolverReturn } from '../../shared/resolvers/event-resolver.service';
 import { AdminPanelService } from '../../shared/admin-panel.service';
+import { AppService } from 'src/app/app.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-events-update',
@@ -38,9 +40,10 @@ export class EventsUpdateComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private eventsService: EventsService,
     private route: ActivatedRoute,
-    private appAlertService: AppAlertService,
+    private appService: AppService,
     private router: Router,
-    private adminPanelService: AdminPanelService
+    private adminPanelService: AdminPanelService,
+    private snackbar: MatSnackBar
   ) {
     this.adminPanelService._toolbarStruct.next([
       {
@@ -95,12 +98,18 @@ export class EventsUpdateComponent implements OnInit, OnDestroy {
   }
 
   public updateEvent() {
+    this.appService.show();
     const event: Event = this.eventsForm.getRawValue();
     this.route.params.subscribe((value: { id: number }) => {
       console.log(value.id);
       this.event = { id: value.id, name: event.name };
     });
-    this.eventsService.updateEvent(this.event);
+    this.eventsService.updateEvent(this.event).subscribe(value => {
+      this.appService.hide();
+      this.snackbar.open('Se actualizo el registro', '', { duration: 5000 });
+      this.router.navigateByUrl('/admin/events');
+      console.log(value);
+    });
   }
 
   public cancel() {

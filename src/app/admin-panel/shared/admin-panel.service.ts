@@ -8,10 +8,10 @@ import { ToolbarStruct } from './../admin-dashboard/admin-dashboard.component';
 export class AdminPanelService {
   // tslint:disable-next-line: variable-name
   public readonly _onAction = new Subject<string>();
+
   // tslint:disable-next-line: variable-name
-  public readonly _toolbarStruct = new Subject<ToolbarStruct[]>();
+  public readonly _toolbarStruct = new Subject<ToolbarStruct[]>(); // se encuentra declado como variable de instanacia
   // tslint:disable-next-line: variable-name
-  public readonly _spinner$ = new Subject<boolean>();
   toolbarStruct: ToolbarStruct[];
   constructor() {}
 
@@ -21,9 +21,5 @@ export class AdminPanelService {
 
   public toolbarStructFn() {
     return this._toolbarStruct.asObservable();
-  }
-
-  public spinner(): Observable<boolean> {
-    return this._spinner$.asObservable();
   }
 }

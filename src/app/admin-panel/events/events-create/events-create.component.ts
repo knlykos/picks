@@ -10,6 +10,9 @@ import { ContextMenu } from 'src/app/models/context-menu';
 import { stringify } from '@angular/compiler/src/util';
 import { AdminPanelService } from '../../shared/admin-panel.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AppService } from 'src/app/app.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-events-create',
@@ -34,7 +37,9 @@ export class EventsCreateComponent implements OnInit {
     private fb: FormBuilder,
     private eventsService: EventsService,
     private adminPanelService: AdminPanelService,
-    private router: Router
+    private router: Router,
+    private appService: AppService,
+    private snackbar: MatSnackBar
   ) {
     this.adminPanelService._toolbarStruct.next([
       {
@@ -55,6 +60,7 @@ export class EventsCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appService.hide();
     this.onchange();
     this.getCategories();
     this.adminPanelService.onAction().subscribe(value => {
@@ -80,7 +86,11 @@ export class EventsCreateComponent implements OnInit {
   public insertEvents() {
     this.formToModel();
 
-    const returnedValue = this.eventsService.insertEvents(this.event, this.category);
+    this.eventsService.insertEvents(this.event, this.category).subscribe(value => {
+      this.appService.show();
+      this.snackbar.open('Se creo el evento ' + this.event.name, '', { duration: 5000 });
+      this.router.navigateByUrl('/admin/events');
+    });
   }
 
   public cancel() {

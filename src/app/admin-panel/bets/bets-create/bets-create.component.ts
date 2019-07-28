@@ -10,6 +10,7 @@ import { ContextMenu } from 'src/app/models/context-menu';
 import { stringify } from '@angular/compiler/src/util';
 import { AdminPanelService } from '../../shared/admin-panel.service';
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-bets-create',
@@ -42,7 +43,8 @@ export class BetsCreateComponent implements OnInit {
     private fb: FormBuilder,
     private betsService: BetsService,
     private adminPanelService: AdminPanelService,
-    private router: Router
+    private router: Router,
+    private appService: AppService
   ) {
     this.contextMenu = [
       {
@@ -75,7 +77,7 @@ export class BetsCreateComponent implements OnInit {
       {
         id: 'cancelar',
         name: 'CANCELAR',
-        color: '',
+        color: 'warn',
         fnName: 'cancel',
         icon: null
       }
@@ -86,6 +88,7 @@ export class BetsCreateComponent implements OnInit {
     this.onchange();
     this.getCategories();
     this.adminPanelService.onAction().subscribe(value => {
+      console.log(this[value]());
       this[value]();
     });
   }
@@ -101,6 +104,7 @@ export class BetsCreateComponent implements OnInit {
 
   public getCategories() {
     this.betsService.getCategories().subscribe(value => {
+      this.appService.hide();
       this.categories = value.data.categories;
     });
   }

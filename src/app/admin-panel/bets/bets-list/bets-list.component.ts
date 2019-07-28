@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AdminPanelService } from '../../shared/admin-panel.service';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-bets-list',
@@ -35,10 +36,14 @@ export class BetsListComponent implements OnInit {
   public contextMenu: ContextMenu[] = [];
   public categories: Category[];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  // se utiliza la injeccion de dependencia es necesario leer y entender el termino
+  // en el caso de betsService es un servicio importado, el chiste de la injeccion de dependecia
+  // es importar todo sin necesidad de hacer import por cada dependencia que se utiliza
   constructor(
     private apollo: Apollo,
     private betsService: BetsService,
     private route: ActivatedRoute,
+    private appService: AppService,
     private adminPanelService: AdminPanelService
   ) {
     this.adminPanelService._toolbarStruct.next([]);
@@ -50,24 +55,24 @@ export class BetsListComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     // this.spinner.show();
-    this.adminPanelService._spinner$.next(true);
     // this.route.data.subscribe((data: { bets: { data: { bets: Bet[] } } }) => {
     //   this.bets = data.bets.data.bets;
     // });
     this.betsService.betsListSubscription().subscribe(value => {
+      // observable
       this.bets = value.data.bets;
       this.dataSource.data = this.bets;
       this.requests += 1;
-      if (this.requests === 2) {
-        this.adminPanelService._spinner$.next(false);
+      if (this.requests === 1) {
+        this.appService.hide();
       }
     });
 
     this.betsService.getCategories().subscribe(value => {
       this.categories = value.data.categories;
       this.requests += 1;
-      if (this.requests === 2) {
-        this.adminPanelService._spinner$.next(false);
+      if (this.requests === 1) {
+        this.appService.hide();
       }
     });
     // this.route.data.subscribe((data: { categories: { data: { categories: Category[] } } }) => {

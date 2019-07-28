@@ -10,6 +10,8 @@ import { Category } from 'src/app/models/category';
 import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AdminPanelService } from '../../shared/admin-panel.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-events-list',
@@ -31,7 +33,8 @@ export class EventsListComponent implements OnInit, OnDestroy {
     private apollo: Apollo,
     private eventsService: EventsService,
     private route: ActivatedRoute,
-    private adminPanelService: AdminPanelService
+    private adminPanelService: AdminPanelService,
+    private appService: AppService
   ) {
     this.adminPanelService._toolbarStruct.next([]);
   }
@@ -39,11 +42,13 @@ export class EventsListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.eventsPrefetch = this.route.data.subscribe(
       (data: { events: { data: { events: Event[] } } }) => {
+        this.appService.hide();
         this.events = data.events.data.events;
       }
     );
     this.categoriesPrefetch = this.route.data.subscribe(
       (data: { categories: { data: { categories: Category[] } } }) => {
+        this.appService.hide();
         this.categories = data.categories.data.categories;
       }
     );
@@ -62,7 +67,7 @@ export class EventsListComponent implements OnInit, OnDestroy {
   }
 
   getCategoryById(categoryId: number): string {
-    let categoryName = 'Sin cantegoría';
+    let categoryName = 'Sin categoría';
     this.categories.map(v => {
       if (v.id === categoryId) {
         categoryName = v.name;

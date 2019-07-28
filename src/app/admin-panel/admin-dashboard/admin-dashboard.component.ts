@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators';
 import { AdminPanelService } from '../shared/admin-panel.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AppService } from 'src/app/app.service';
 
 export interface ToolbarStruct {
   id: string;
@@ -37,19 +38,13 @@ export class AdminDashboardComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {
     this.adminPanelService._toolbarStruct.subscribe(value => {
+      // aqui se ejecuta y llena una lista
+      // con el valor que recibe del subscribe
       this.toolbarStruct = value;
     });
   }
 
-  ngOnInit() {
-    this.adminPanelService._spinner$.subscribe(value => {
-      if (value === true) {
-        this.spinner.show();
-      } else {
-        this.spinner.hide();
-      }
-    });
-  }
+  ngOnInit() {}
 
   private launchAction(fnName: string): void {
     this.adminPanelService._onAction.next(fnName);

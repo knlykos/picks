@@ -25,20 +25,22 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 // import { TeamsCreateComponent } from './teams-create/teams-create.component';
 
 // import { TeamsListComponent } from './teams-list/teams-list.component';
-
+// Este es el archivo de configuración del modulo de admin,
 @NgModule({
+  // Sirve para lllamar a los componentes que va a usar el modulo
   declarations: [
     AdminPanelComponent,
     AppAlertComponent,
     AppAlertDirective,
     AdminDashboardComponent
   ],
+  // Sirve para importar los modulos que se van a utilizar en el modulo
   imports: [
     CommonModule,
     FormsModule,
     ClarityModule,
     ReactiveFormsModule,
-    AdminPanelRoutingModule,
+    AdminPanelRoutingModule, // Routeador del modulo de admin
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -47,9 +49,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatListModule,
     MatMenuModule,
     MatDividerModule,
-    NgxSpinnerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxSpinnerModule
   ]
 })
 export class AdminPanelModule {}

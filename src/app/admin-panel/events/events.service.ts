@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { ContextMenu } from 'src/app/models/context-menu';
 import { ApolloQueryResult } from 'apollo-client';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class EventsService {
   public events: Event[] = [];
   public category: Category;
   public contextMenu: ContextMenu[] = [];
-  constructor(private apollo: Apollo, private router: Router) {}
+  constructor(private apollo: Apollo, private router: Router, private spinner: NgxSpinnerService) {}
 
   public eventsListSubscription(): Observable<any> {
     console.log('eventsListSubscription');
@@ -32,16 +33,16 @@ export class EventsService {
     });
   }
 
-  public insertEvents(event: Event, category: Category) {
+  public insertEvents(event: Event, category: Category): Observable<any> {
+    console.log(event);
     this.event = event;
     this.category = category;
-    this.apollo
-      .mutate<Query>({
-        mutation: gql`
+    return this.apollo.mutate<Query>({
+      mutation: gql`
         mutation {
           insert_events(
             objects: {
-              name: ${this.event.name}
+              name: "${this.event.name}"
             }
           ) {
             returning {
@@ -50,10 +51,7 @@ export class EventsService {
           }
         }
         `
-      })
-      .subscribe(value => {
-        return value;
-      });
+    });
   }
 
   public getEventsById(id: number): Observable<ApolloQueryResult<{ events: Event[] }>> {
@@ -87,10 +85,9 @@ export class EventsService {
 
   public updateEvent(event: Event) {
     this.event = event;
-    console.log(this.event);
-    this.apollo
-      .mutate<Query>({
-        mutation: gql`
+
+    return this.apollo.mutate<Query>({
+      mutation: gql`
         mutation {
           update_events(
             where: { id: { _eq: ${this.event.id} } }
@@ -105,10 +102,7 @@ export class EventsService {
           }
         }
       `
-      })
-      .subscribe(value => {
-        console.log(value);
-      });
+    });
   }
 
   cancel(): void {

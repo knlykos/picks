@@ -24,11 +24,15 @@ import {
   MatRippleModule,
   MatTableModule,
   MatPaginatorModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatSpinner,
+  MatProgressSpinnerModule
 } from '@angular/material';
-
+import { OverlayModule } from '@angular/cdk/overlay';
+import { SharedComponentsModule } from 'src/app/shared-components/shared-components.module';
+// Modulo importaciones y componentes utilizado en bets
 @NgModule({
-  declarations: [BetsCreateComponent, BetsListComponent, BetsUpdateComponent],
+  declarations: [BetsCreateComponent, BetsListComponent, BetsUpdateComponent], // componentes utilizados
   imports: [
     CommonModule,
     BetsRoutingModule,
@@ -49,7 +53,8 @@ import {
     NgxSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    SharedComponentsModule
   ],
   providers: [MatDatepickerModule, { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }]
 })

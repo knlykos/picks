@@ -31,6 +31,7 @@
     </mat-toolbar>
     <mat-toolbar class="mat-toolbar-secondary mat-elevation-z3" style="margin-bottom: 15px">
       <mat-toolbar-row>
+        <!-- Lista que llena el observable con los botones -->
         <button
           mat-button
           (click)="launchAction(item.fnName)"
@@ -41,9 +42,9 @@
           {{ item.name }}
         </button>
         <span class="mat-toolbar-spacer"></span>
-        <div class="gb_De">
+        <!-- <div class="gb_De">
           <form class="gb_Qe aSVJYc-G0jgYd-ZMv3u" method="get">
-            <!-- <button class="gb_mf" aria-label="Cerrar la búsqueda" type="button">
+            <button class="gb_mf" aria-label="Cerrar la búsqueda" type="button">
               <svg
                 focusable="false"
                 height="24px"
@@ -54,7 +55,7 @@
                 <path d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
               </svg>
-            </button> -->
+            </button>
             <div class="gb_rf">
               <input
                 class="gb_bf"
@@ -100,7 +101,7 @@
               </svg>
             </button>
           </form>
-        </div>
+        </div> -->
       </mat-toolbar-row>
     </mat-toolbar>
 

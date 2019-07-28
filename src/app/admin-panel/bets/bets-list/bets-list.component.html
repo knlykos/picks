@@ -1,16 +1,6 @@
-<ngx-spinner
-  bdOpacity="0.9"
-  bdColor="rgba(51,51,51,0.42)"
-  size="default"
-  color="#fff"
-  type="ball-clip-rotate"
-  [fullScreen]="true"
->
-  <p style="color: white">Cargando...</p>
-</ngx-spinner>
 <mat-card
   style="margin: 0 10px; overflow-y: auto;"
-  [ngStyle]="{ visibility: requests === 2 ? 'visible' : 'hidden' }"
+  [ngStyle]="{ visibility: requests > 0 ? 'visible' : 'hidden' }"
 >
   <!-- <table>
     <tr>
@@ -31,7 +21,11 @@
       <td><mat-icon>chevron_right</mat-icon></td>
     </tr>
   </table> -->
-
+  <!-- Aqui tengo un componente que utiliza la tabla  basicamente un componente es una clase
+que hace una representacion de html, en que se reciben parametros como datos de entrada y retorna datos
+y tiene un aspecto visual
+[dataSource]="dataSource" es una entra de datos
+-->
   <table mat-table [dataSource]="dataSource" style="width: 100%;">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID</th>

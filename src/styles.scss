@@ -15,3 +15,25 @@ body {
   font-weight: normal;
   src: local('Product Sans Regular'), url('./assets/fonts/ProductSans-Regular.woff') format('woff');
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.column-margin > .column {
+  margin: 5px;
+}

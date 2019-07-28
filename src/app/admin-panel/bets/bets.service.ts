@@ -6,19 +6,25 @@ import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
 import { ContextMenu } from 'src/app/models/context-menu';
 import { ApolloQueryResult } from 'apollo-client';
+import { AppService } from 'src/app/app.service';
 
 @Injectable({
   providedIn: 'root'
 })
+// Los servicios son clases que sirven para interconectar los componentes
+// y reulizar funciones entre los componentes.
 export class BetsService {
   public bet: Bet;
   public bets: Bet[] = [];
   public category: Category;
   public contextMenu: ContextMenu[] = [];
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, private appService: AppService) {}
 
+  // por ejemplos todos las funciones que hay aqui solo reciben parametros y retornan un observable
+  // el observable es una llamada al servidor que obtiene los datos un query
+  // en este caso obtiene la lista de las apuestas
   public betsListSubscription(): Observable<{ data: { bets: Bet[] } }> {
-    console.log('betsListSubscription');
+    this.appService.show();
     return this.apollo.subscribe<Query>({
       query: gql`
         subscription {
@@ -40,6 +46,7 @@ export class BetsService {
   }
 
   public insertBets(bet: Bet, category: Category) {
+    this.appService.show();
     this.bet = bet;
     this.category = category;
     this.apollo
@@ -69,6 +76,7 @@ export class BetsService {
   }
 
   public getBetsById(id: number): Observable<ApolloQueryResult<{ bets: Bet[] }>> {
+    this.appService.show();
     return this.apollo.watchQuery<{ bets: Bet[] }>({
       query: gql`{
         bets(where: {id: {_eq: ${id}}}) {
@@ -93,6 +101,7 @@ export class BetsService {
       categories: Category[];
     }>
   > {
+    this.appService.show();
     return this.apollo.watchQuery<{ categories: Category[] }>({
       query: gql`
         {
@@ -107,6 +116,7 @@ export class BetsService {
   }
 
   public updateBet(bet: Bet, category: Category) {
+    this.appService.show();
     this.bet = bet;
     this.category = category;
     return this.apollo.mutate<Query>({

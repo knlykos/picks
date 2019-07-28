@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo, Query } from 'apollo-angular';
 import { Observable } from 'apollo-link';
 import gql from 'graphql-tag';
+import { AppService } from './app.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +11,15 @@ import gql from 'graphql-tag';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Picks';
-  todos$: Observable<any>;
+  constructor(private appService: AppService, private spinner: NgxSpinnerService) {}
 
-  constructor(private apollo: Apollo) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.appService.spin$.subscribe(value => {
+      if (value === true) {
+        this.spinner.show();
+      } else {
+        this.spinner.hide();
+      }
+    });
+  }
 }
