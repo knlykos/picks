@@ -1,42 +1,47 @@
-<!--
-    <div class="card">
-      <div class="card-header">
-        Equipos
-      </div>
-      <div class="card-block">
-        <div class="card-title">
-          Block
-        </div>
-        <div class="card-text">
-          <form clrForm>
-            <clr-input-container>
-              <label for="name">Nombre</label>
-              <input type="text" [(ngModel)]="team.name" name="name" clrInput id="name" />
-            </clr-input-container>
-            <clr-input-container>
-              <label for="description">Descripción</label>
-              <input
-                type="text"
-                name="description"
-                [(ngModel)]="team.description"
-                clrInput
-                id="description"
-              />
-            </clr-input-container>
-            <clr-input-container>
-              <label for="logo-url">Logo</label>
-              <input type="text" name="logo-url" [(ngModel)]="team.logoUrl" clrInput id="name" />
-            </clr-input-container>
-          </form>
-        </div>
-      </div>
-      <div class="card-footer">
-        <button name="insert-team" class="btn btn-sm btn-link" (click)="insertTeam()">
-          Guardar
-        </button>
-      </div>
-    </div> -->
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Equipos
+    </mat-card-title>
+  </mat-card-header>
 
+  <form>
+    <div class="row column-margin">
+      <div class="column">
+        <mat-form-field appearance="standard">
+          <mat-label for="name">Nombre</mat-label>
+          <input type="text" matInput [(ngModel)]="team.name" name="name" id="name" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row column-margin">
+      <div class="column">
+        <mat-form-field appearance="standard">
+          <mat-label for="description">Descripción</mat-label>
+          <input
+            type="text"
+            name="description"
+            [(ngModel)]="team.description"
+            matInput
+            id="description"
+          />
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="standard">
+          <mat-label for="logo-url">Logo</mat-label>
+          <input type="text" name="logo-url" [(ngModel)]="team.logoUrl" matInput id="name" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <!-- <div class="card-footer">
+    <button name="insert-team" class="btn btn-sm btn-link" (click)="insertTeam()">
+      Guardar
+    </button>
+  </div> -->
+</mat-card>
 
 <!-- <label class="btn btn-link">
     <input type="file"

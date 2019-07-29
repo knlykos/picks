@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Team } from './../../../models/team';
 import { Apollo, Query } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { AdminPanelService } from '../../shared/admin-panel.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teams-create',
@@ -10,7 +12,19 @@ import gql from 'graphql-tag';
 })
 export class TeamsCreateComponent implements OnInit {
   team: Team = { name: null, description: null, logoUrl: null };
-  constructor(private apollo: Apollo) {}
+  constructor(
+    private apollo: Apollo,
+    private adminPanelService: AdminPanelService,
+    private router: Router
+  ) {
+    this.adminPanelService._toolbarStruct.next([
+      { id: 'update', color: 'primary', fnName: 'insertTeam', icon: '', name: 'GUARDAR' },
+      { id: 'cancel', color: 'warn', fnName: 'cancelTeam', icon: '', name: 'CANCELAR' }
+    ]);
+    this.adminPanelService.onAction().subscribe(value => {
+      this[value]();
+    });
+  }
 
   ngOnInit() {}
 
@@ -32,5 +46,8 @@ export class TeamsCreateComponent implements OnInit {
       .subscribe(value => {
         console.log(value);
       });
+  }
+  cancelTeam() {
+    this.router.navigateByUrl('/admin/teams');
   }
 }

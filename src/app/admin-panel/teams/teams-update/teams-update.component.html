@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar [src]="this.teamsForm.get('logoUrl').value" alt="" />
+    <mat-card-title> Apuesta Nueva</mat-card-title>
+    <mat-card-subtitle>
+      {{
+        this.teamsForm.get('name').value === null || this.teamsForm.get('name').value === ''
+          ? 'Titulo de Apuesta'
+          : this.teamsForm.get('name').value
+      }}</mat-card-subtitle
+    >
+  </mat-card-header>
+
+  <form [formGroup]="teamsForm">
+    <div class="row column-margin">
+      <div class="column">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" name="title" id="title" formControlName="name" />
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Logotipo</mat-label>
+          <input matInput id="logo-url" type="text" name="logoUrl" formControlName="logoUrl" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row column-margin">
+      <div class="column">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Descripción</mat-label>
+          <textarea
+            rows="5"
+            matInput
+            id="description"
+            type="text"
+            name="description"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-card>

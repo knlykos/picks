@@ -1,5 +1,9 @@
-<mat-nav-list *ngFor="let team of teams">
-  <mat-list-item>
+<mat-nav-list>
+  <mat-list-item
+    *ngFor="let team of teams"
+    [routerLink]="['/admin', 'teams', 'update', team.id]"
+    routerLinkActive="router-link-active"
+  >
     <!-- <h3 matLine>{{ team.id }}</h3> -->
     <img matListAvatar [src]="team.logoUrl" height="40" alt="" />
     <p style="width: 400px">{{ team.name }}</p>
