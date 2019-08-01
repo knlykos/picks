@@ -61,6 +61,8 @@ export class BetsService {
               title: "${this.bet.title}"
               createdAt: "${new Date().toJSON()}",
               eventDate: "${new Date(this.bet.eventDate).toJSON()}",
+              teamOneId: ${this.bet.teamOneId},
+              teamTwoId: ${this.bet.teamTwoId}
             }
           ) {
             returning {
@@ -89,7 +91,9 @@ export class BetsService {
           id
           placeId
           siteId
-          title
+          title,
+          teamOneId,
+          teamTwoId
         }
       }
       `
@@ -133,7 +137,9 @@ export class BetsService {
               createdBy: ${this.bet.createdBy}
               createdAt: "${new Date().toJSON()}"
               categoryId: ${this.bet.categoryId}
-              eventDate: "${new Date(this.bet.eventDate).toJSON()}"
+              eventDate: "${new Date(this.bet.eventDate).toJSON()}",
+              teamOneId: ${this.bet.teamOneId},
+              teamTwoId: ${this.bet.teamTwoId}
             }
           ) {
             returning {

@@ -13,6 +13,7 @@ import {
   MatSnackBarModule
 } from '@angular/material';
 import { TeamsUpdateComponent } from './teams-update/teams-update.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [TeamsCreateComponent, TeamsListComponent, TeamsUpdateComponent],
@@ -20,6 +21,7 @@ import { TeamsUpdateComponent } from './teams-update/teams-update.component';
     CommonModule,
     TeamsRoutingModule,
     FormsModule,
+    HttpClientModule,
     MatListModule,
     ReactiveFormsModule,
     MatFormFieldModule,

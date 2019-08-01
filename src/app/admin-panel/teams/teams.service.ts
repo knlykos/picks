@@ -16,6 +16,21 @@ export class TeamsService {
   constructor(private apollo: Apollo, private appService: AppService) {}
 
   public getTeamsList(): Observable<{ data: { teams: Team[] } }> {
+    return this.apollo.watchQuery<{ teams: Team[] }>({
+      query: gql`
+        {
+          teams {
+            id
+            name
+            description
+            logoUrl
+          }
+        }
+      `
+    }).valueChanges;
+  }
+
+  public getTeamsListSubs(): Observable<{ data: { teams: Team[] } }> {
     return this.apollo.subscribe<Query>({
       query: gql`
         subscription {

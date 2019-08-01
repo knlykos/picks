@@ -11,6 +11,10 @@ import { stringify } from '@angular/compiler/src/util';
 import { AdminPanelService } from '../../shared/admin-panel.service';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
+import { TeamsService } from '../../teams/teams.service';
+import { Team } from 'src/app/models/team';
+import { take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-bets-create',
@@ -33,10 +37,15 @@ export class BetsCreateComponent implements OnInit {
   public betsForm = this.fb.group({
     title: [null, Validators.required],
     description: [null, Validators.required],
-    categoryId: [1, Validators.required],
+    categoryId: [null, Validators.required],
     eventDate: [null, Validators.required],
-    eventUrl: [null, Validators.required]
+    eventUrl: [null, Validators.required],
+    teamOneId: [null, Validators.required],
+    teamTwoId: [null, Validators.required]
   });
+
+  public teamsOne: Team[];
+  public teamsTwo: Team[];
 
   constructor(
     private apollo: Apollo,
@@ -44,28 +53,10 @@ export class BetsCreateComponent implements OnInit {
     private betsService: BetsService,
     private adminPanelService: AdminPanelService,
     private router: Router,
-    private appService: AppService
+    private appService: AppService,
+    private teamsService: TeamsService,
+    private snackbar: MatSnackBar
   ) {
-    this.contextMenu = [
-      {
-        id: 'btn-save',
-        title: 'GUARDAR',
-        cssClass: 'btn btn-primary',
-        tooltip: 'Crear una nueva apuesta',
-        url: [''],
-        disabled: false,
-        functionName: 'insertBets'
-      },
-      {
-        id: 'btn-cancel',
-        title: 'CANCELAR',
-        cssClass: 'btn',
-        tooltip: 'Cancela la apuesta actual',
-        url: ['/admin/bets'],
-        disabled: false
-      }
-    ];
-    this.betsService.contextMenu = this.contextMenu;
     this.adminPanelService._toolbarStruct.next([
       {
         id: 'guardar',
@@ -87,10 +78,19 @@ export class BetsCreateComponent implements OnInit {
   ngOnInit() {
     this.onchange();
     this.getCategories();
-    this.adminPanelService.onAction().subscribe(value => {
-      console.log(this[value]());
-      this[value]();
-    });
+    this.adminPanelService
+      .onAction()
+      .pipe(take(1))
+      .subscribe(value => {
+        if (this.betsForm.valid === true && value === 'insertBets') {
+          this[value]();
+        } else if (value === 'cancel') {
+          this[value]();
+        } else {
+          this.snackbar.open('Completa el formulario para continuar', 'CERRAR', { duration: 5000 });
+        }
+      });
+    this.getTeamsList();
   }
   onchange() {
     this.betsForm.valueChanges.subscribe(value => {
@@ -114,6 +114,13 @@ export class BetsCreateComponent implements OnInit {
 
     const returnedValue = this.betsService.insertBets(this.bet, this.category);
     this.router.navigateByUrl('/admin/bets');
+  }
+
+  public getTeamsList() {
+    this.teamsService.getTeamsList().subscribe(value => {
+      this.teamsOne = value.data.teams;
+      this.teamsTwo = value.data.teams;
+    });
   }
 
   public cancel() {

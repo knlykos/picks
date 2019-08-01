@@ -41,7 +41,9 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
     eventUrl: [null, Validators.required],
     placeId: [null],
     siteId: [null],
-    eventDate: [null, Validators.required]
+    eventDate: [null, Validators.required],
+    teamOneId: [null, Validators.required],
+    teamTwoId: [null, Validators.required]
   });
   constructor(
     private fb: FormBuilder,

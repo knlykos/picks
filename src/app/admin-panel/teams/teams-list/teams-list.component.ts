@@ -23,7 +23,7 @@ export class TeamsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.teamsService.getTeamsList().subscribe(value => {
+    this.teamsService.getTeamsListSubs().subscribe(value => {
       this.teams = value.data.teams;
       this.appService.hide();
     });
