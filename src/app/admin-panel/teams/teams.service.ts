@@ -19,11 +19,11 @@ export class TeamsService {
     return this.apollo.watchQuery<{ teams: Team[] }>({
       query: gql`
         {
-          teams {
+          teams(order_by: { id: asc }) {
             id
-            name
             description
             logoUrl
+            name
           }
         }
       `
@@ -84,5 +84,19 @@ export class TeamsService {
         }
       `
     });
+  }
+
+  // ChangeNameId(teamName: string, teams: Team[]) {
+  //   this.doSearch()
+  // }
+
+  ChangeNameId(teams: Team[], teamName: string) {
+    let id = -1;
+    teams.map(v => {
+      if (v.name === teamName) {
+        id = v.id;
+      }
+    });
+    return id;
   }
 }

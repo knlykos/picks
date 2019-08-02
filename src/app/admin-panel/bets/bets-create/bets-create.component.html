@@ -81,7 +81,7 @@
         </mat-form-field>
       </div>
       <div class="column">
-        <mat-form-field appearance="standard">
+        <!-- <mat-form-field appearance="standard">
           <mat-select name="team-one-selector" id="team-one-selector" formControlName="teamOneId">
             <mat-option [value]="teamOne.id" *ngFor="let teamOne of teamsOne">
               <div style="display: flex; align-items: center;">
@@ -91,10 +91,29 @@
               </div></mat-option
             >
           </mat-select>
+        </mat-form-field> -->
+        <mat-form-field appearance="standard">
+          <input
+            matInput
+            placeholder="State"
+            aria-label="State"
+            [matAutocomplete]="auto"
+            formControlName="teamOneId"
+          />
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option [value]="teamOne.name" *ngFor="let teamOne of teamsOne">
+              <div style="display: flex; align-items: center;">
+                <img style="height: 24px; margin-right: 20px" [src]="teamOne.logoUrl" alt="" />{{
+                  teamOne.name
+                }}
+              </div></mat-option
+            >
+          </mat-autocomplete>
         </mat-form-field>
       </div>
       <div class="column">
-        <mat-form-field appearance="standard">
+        <!-- <mat-form-field appearance="standard">
           <mat-select name="team-two-selector" id="team-two-selector" formControlName="teamTwoId">
             <mat-option [value]="teamTwo.id" *ngFor="let teamTwo of teamsTwo">
               <div style="display: flex; align-items: center;">
@@ -104,6 +123,25 @@
               </div>
             </mat-option>
           </mat-select>
+        </mat-form-field> -->
+        <mat-form-field appearance="standard">
+          <input
+            matInput
+            placeholder="State"
+            aria-label="State"
+            [matAutocomplete]="auto"
+            formControlName="teamTwoId"
+          />
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option [value]="teamTwo.name" *ngFor="let teamTwo of teamsOne">
+              <div style="display: flex; align-items: center;">
+                <img style="height: 24px; margin-right: 20px" [src]="teamTwo.logoUrl" alt="" />{{
+                  teamTwo.name
+                }}
+              </div></mat-option
+            >
+          </mat-autocomplete>
         </mat-form-field>
       </div>
     </div>

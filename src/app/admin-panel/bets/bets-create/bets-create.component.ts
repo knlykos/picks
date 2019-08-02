@@ -78,18 +78,15 @@ export class BetsCreateComponent implements OnInit {
   ngOnInit() {
     this.onchange();
     this.getCategories();
-    this.adminPanelService
-      .onAction()
-      .pipe(take(1))
-      .subscribe(value => {
-        if (this.betsForm.valid === true && value === 'insertBets') {
-          this[value]();
-        } else if (value === 'cancel') {
-          this[value]();
-        } else {
-          this.snackbar.open('Completa el formulario para continuar', 'CERRAR', { duration: 5000 });
-        }
-      });
+    this.adminPanelService.onAction().subscribe(value => {
+      // if (this.betsForm.valid === true && value === 'insertBets') {
+      this[value]();
+      // } else if (value === 'cancel') {
+      //   this[value]();
+      // } else {
+      //   this.snackbar.open('Completa el formulario para continuar', 'CERRAR', { duration: 5000 });
+      // }
+    });
     this.getTeamsList();
   }
   onchange() {
@@ -111,7 +108,12 @@ export class BetsCreateComponent implements OnInit {
 
   public insertBets() {
     this.formToModel();
-
+    const teamOne = this.betsForm.get('teamOneId').value;
+    const teamTwo = this.betsForm.get('teamOneId').value;
+    const teamOneId = this.teamsService.ChangeNameId(this.teamsOne, teamOne);
+    const teamTwoId = this.teamsService.ChangeNameId(this.teamsOne, teamOne);
+    this.bet.teamOneId = teamOneId;
+    this.bet.teamTwoId = teamTwoId;
     const returnedValue = this.betsService.insertBets(this.bet, this.category);
     this.router.navigateByUrl('/admin/bets');
   }

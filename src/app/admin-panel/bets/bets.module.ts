@@ -26,7 +26,8 @@ import {
   MatPaginatorModule,
   MatSnackBarModule,
   MatSpinner,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { SharedComponentsModule } from 'src/app/shared-components/shared-components.module';
@@ -54,6 +55,7 @@ import { SharedComponentsModule } from 'src/app/shared-components/shared-compone
     MatTableModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatAutocompleteModule,
     SharedComponentsModule
   ],
   providers: [MatDatepickerModule, { provide: MAT_DATE_LOCALE, useValue: 'es-MX' }]

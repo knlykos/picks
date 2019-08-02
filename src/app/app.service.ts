@@ -51,6 +51,8 @@ export class AppService {
   hide() {
     this.spin$.next(false);
   }
+
+
   // reset() {
   //   this.spin$.next(0);
   // }
