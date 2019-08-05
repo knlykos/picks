@@ -101,8 +101,10 @@ export class BetsUpdateComponent implements OnInit, OnDestroy {
         this.betsForm.patchValue(this.bet);
         this.teamsOne = value.data.teams;
         this.teamsTwo = value.data.teams;
+        debugger;
         this.teamOneId.setValue(value.data.bets[0].team_bets[0].team.name);
         this.teamTwoId.setValue(value.data.bets[0].team_bets[1].team.name);
+
         this.teams = value.data.teams;
         this.appService.hide();
       });
