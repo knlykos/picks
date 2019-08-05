@@ -105,6 +105,16 @@ export class EventsService {
     });
   }
 
+  ChangeNameId(teams: Event[], teamName: string) {
+    let id = -1;
+    teams.map(v => {
+      if (v.name === teamName) {
+        id = v.id;
+      }
+    });
+    return id;
+  }
+
   cancel(): void {
     this.router.navigateByUrl('/admin/events');
   }

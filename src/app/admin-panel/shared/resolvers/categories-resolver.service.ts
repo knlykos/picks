@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Bet } from 'src/app/models/bets';
+import { BetQuery } from 'src/app/models/bets';
 import { Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { BetsService } from './../../bets/bets.service';
 import { Observable, pipe } from 'rxjs';

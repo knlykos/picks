@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ViewChildren } from '@angular/core';
 import { Apollo, Query } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Bet } from 'src/app/models/bets';
+import { BetQuery, BetMutation } from 'src/app/models/bets';
 import { BetsService } from '../bets/bets.service';
 import { ContextMenu } from 'src/app/models/context-menu';
 import { BetsCreateComponent } from '../bets/bets-create/bets-create.component';
@@ -14,7 +14,7 @@ import { BetsCreateComponent } from '../bets/bets-create/bets-create.component';
 export class AdminPanelComponent implements OnInit, AfterViewInit {
   updateItsDisabled = true;
   contextMenu: ContextMenu[];
-  bets: Bet;
+  bets: BetMutation;
 
   constructor(private apollo: Apollo, private betsService: BetsService) {}
 

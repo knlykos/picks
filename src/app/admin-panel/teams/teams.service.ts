@@ -5,6 +5,8 @@ import { Team } from 'src/app/models/team';
 import { Observable } from 'rxjs';
 import { ApolloQueryResult } from 'apollo-client';
 import { AppService } from 'src/app/app.service';
+import { TeamBet } from 'src/app/models/team-bet';
+import { BetMutation } from 'src/app/models/bets';
 
 @Injectable({
   providedIn: 'root'
@@ -98,5 +100,31 @@ export class TeamsService {
       }
     });
     return id;
+  }
+
+  teamNameToList(teamNames: string[], teams: Team[], betId: number): TeamBet[] {
+    let teamBet: TeamBet = { teamId: 0 };
+    const teamsBets: TeamBet[] = [];
+    teamNames.map(name => {
+      teams.map(v => {
+        if (v.name === name) {
+          teamBet = { teamId: v.id };
+          teamsBets.push(teamBet);
+        }
+      });
+    });
+
+    return teamsBets;
+  }
+
+  updateTeamBet(teamId: number, betMutationId: number) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation {
+        update_team_bets(where: {betId: {_eq: ${betMutationId}}}, _set: {teamId: ${teamId}}) {
+    affected_rows
+  }
+      }`
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category';
-import { Bet } from 'src/app/models/bets';
+import { BetMutation } from 'src/app/models/bets';
 import { TeamsService } from '../teams.service';
 import { ContextMenu } from 'src/app/models/context-menu';
 import { Apollo } from 'apollo-angular';

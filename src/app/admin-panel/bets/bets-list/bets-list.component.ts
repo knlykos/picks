@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Query, Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Bet } from 'src/app/models/bets';
+import { BetQuery } from 'src/app/models/bets';
 import { BetsService } from '../bets.service';
 import { ContextMenu } from 'src/app/models/context-menu';
 import { TableTitle } from 'src/app/models/table';
@@ -20,7 +20,7 @@ import { AppService } from 'src/app/app.service';
 })
 export class BetsListComponent implements OnInit {
   public requests = 0;
-  public selectedBet: Bet = null;
+  public selectedBet: BetQuery = null;
   public betsTableTitle: TableTitle[] = [
     { title: 'id', icon: null, style: 'text-align: right' },
     { title: 'Apuesta', icon: null, style: 'text-align: right' },
@@ -31,8 +31,8 @@ export class BetsListComponent implements OnInit {
   ];
 
   public betsTitle = ['id', 'title', 'description', 'category', 'date', 'eventUrl'];
-  public bets: Bet[] = [];
-  public dataSource = new MatTableDataSource<Bet>(this.bets);
+  public bets: BetQuery[] = [];
+  public dataSource = new MatTableDataSource<BetQuery>(this.bets);
   public contextMenu: ContextMenu[] = [];
   public categories: Category[];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -80,7 +80,7 @@ export class BetsListComponent implements OnInit {
     // });
   }
   goToUpdate() {
-    this.betsService.bet = this.selectedBet;
+    this.betsService.betQuery = this.selectedBet;
   }
 
   selectionChanged(id: number) {

@@ -55,8 +55,10 @@
           />
         </mat-form-field>
       </div>
+    </div>
+    <div class="row column-margin">
       <div class="column">
-        <mat-form-field class="example-full-width" appearance="outline">
+        <mat-form-field appearance="standard">
           <mat-select
             name="categories-selector"
             id="category-selector"
@@ -66,6 +68,48 @@
               category.name
             }}</mat-option>
           </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="standard">
+          <input
+            matInput
+            placeholder="State"
+            aria-label="State"
+            [matAutocomplete]="auto1"
+            [formControl]="teamOneId"
+          />
+
+          <mat-autocomplete #auto1="matAutocomplete">
+            <mat-option [value]="teamOne.name" *ngFor="let teamOne of teamsOne">
+              <div style="display: flex; align-items: center;">
+                <img style="height: 24px; margin-right: 20px" [src]="teamOne.logoUrl" alt="" />{{
+                  teamOne.name
+                }}
+              </div></mat-option
+            >
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="standard">
+          <input
+            matInput
+            placeholder="State"
+            aria-label="State"
+            [matAutocomplete]="auto2"
+            [formControl]="teamTwoId"
+          />
+
+          <mat-autocomplete #auto2="matAutocomplete">
+            <mat-option [value]="teamTwo.name" *ngFor="let teamTwo of teamsOne">
+              <div style="display: flex; align-items: center;">
+                <img style="height: 24px; margin-right: 20px" [src]="teamTwo.logoUrl" alt="" />{{
+                  teamTwo.name
+                }}
+              </div></mat-option
+            >
+          </mat-autocomplete>
         </mat-form-field>
       </div>
     </div>
